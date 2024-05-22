@@ -95,13 +95,10 @@ if (x === 1) {
 }
 
 let outStr = 'etc';
-if (x === 1) {
-  outStr = 'one';
-} else if (x === 2) {
-  outStr = 'two';
-} else if (x === 3) {
-  outStr = 'three';
-}
+if (x === 1) outStr = 'one';
+else if (x === 2) outStr = 'two';
+else if (x === 3) outStr = 'three';
+
 console.log(outStr);
 
 // 2. switch 문
@@ -122,3 +119,25 @@ switch (x) {
 // 3. 3항 연산자
 outStr = x === 1 ? 'one' : x === 2 ? 'two' : x === 3 ? 'three' : 'etc';
 console.log('🚀  outStr:', outStr);
+
+// 4. ||(OR) 연산자
+outStr =
+  (x === 1 ? 'one' : '') ||
+  (x === 2 ? 'two' : '') ||
+  (x === 3 ? 'three' : 'etc');
+console.log('🚀  outStr:', outStr);
+
+console.log('====================');
+let i = 5;
+while (i > 0) {
+  console.log('🚀  i:', i);
+  i = i - 1; // i--
+}
+i = 5;
+while (i-- > 0) console.log('🚀  i:', i);
+
+console.log('------------');
+i = 5;
+do {
+  console.log('🚀  i:', i);
+} while (i-- > 1);
