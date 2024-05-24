@@ -103,17 +103,19 @@ console.log(outStr);
 
 // 2. switch 문
 switch (x) {
-  case 1:
+  // switch (true) {
+  case 1: // if(x === 1)
     console.log('one');
     break;
-  case 2:
+  case 2: // if (x === 2)
+    // case x === 2: // if (true === true)
     console.log('two');
     break;
   case 3:
     console.log('three');
     break;
   default:
-    console.log('etc');
+    console.log('etc!');
 }
 
 // 3. 3항 연산자
@@ -199,7 +201,88 @@ for (const p in user) {
   console.log('🚀  p:', p, user[p]); // user['id']
 }
 
+const cart = {
+  user: user,
+  items: [
+    { id: 100, itemName: '신라면' },
+    { id: 200, itemName: '너구리' },
+  ],
+};
+
+console.log('============================');
+console.log('cartOwner=', cart.user.name);
+for (const cc in cart) {
+  if (cc === 'user') {
+    for (const p in cart[cc]) {
+      console.log('🚀  p:', p, user[p]); // user['id']
+    }
+  } else if (cc === 'items') {
+    for (const item of cart[cc]) {
+      console.log(item.itemName);
+    }
+  }
+}
+console.log('============================');
+
+for (const p in user) {
+  console.log('🚀  p:', p, user[p]); // user['id']
+}
+
 const WEEK_NAMES = '일월화수목금토';
 for (const w of WEEK_NAMES) {
   console.log('🚀  w:', w);
 }
+
+let total = 0;
+function add(x, y) {
+  total = x + y;
+}
+
+const 국어 = 80;
+const 수학 = 70;
+// const total = add(국어, 수학);
+add(국어, 수학);
+console.log('🚀  total:', total);
+
+function checkScore60() {
+  if (국어 > 70) {
+    return '합격';
+  } else if (수학 > 70) {
+    return '통과';
+  } else {
+    return '불합격';
+  }
+}
+
+function checkScore() {
+  if (국어 > 70) {
+    return '합격';
+  }
+
+  if (수학 > 70) {
+    return '통과';
+  }
+
+  return '불합격';
+}
+
+console.log(checkScore());
+
+console.log('+++++++++++++++++++++++');
+const dt = new Date();
+console.log('🚀  dt:', dt, dt.getDay());
+
+const obj = {
+  id: 1,
+  name: 'zzz',
+  fn: function () {
+    console.log(arguments);
+  },
+};
+
+const { fn } = obj;
+fn(1, 2, 3);
+const {
+  fn: { name: nm },
+} = obj;
+console.log('🚀  name:', nm);

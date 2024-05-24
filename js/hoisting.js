@@ -18,7 +18,8 @@ f();      // TypeError: f is not a function
   x = 2; b = 1;
 }
 if (x > 2) {
-  let yy = <unInitializedYet>;
+  // let yy = <unInitializedYet>;
+  let yy;
   y = 5;
   yy = 55;
 }
