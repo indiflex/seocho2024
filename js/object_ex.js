@@ -38,3 +38,17 @@ console.log('\n7. role 프로퍼티를 읽기전용', Object.entries(obj));
 function makeObjectFromArray(arr) {
   // 구현하세요!
 }
+
+const objarr1 = makeObjectFromArray([
+  ['A', 10, 20],
+  ['B', 30, 40],
+  ['C', 50, 60, 70],
+]);
+console.log(objarr1);
+
+function makeArrayFromObject(o) {}
+
+console.log('🚀>>  arrobj:', makeArrayFromObject(objarr1));
+
+// -------------------------
+function copyObject(o) {}
