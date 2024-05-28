@@ -34,9 +34,15 @@ Object.freeze(obj, 'role');
 obj.role = 99;
 console.log('\n7. role 프로퍼티를 읽기전용', Object.entries(obj));
 
+console.log('=======================');
 // p.113
 function makeObjectFromArray(arr) {
-  // 구현하세요!
+  const obj = {};
+  for (const [k, ...v] of arr) {
+    obj[k] = v;
+  }
+
+  return obj;
 }
 
 const objarr1 = makeObjectFromArray([
@@ -46,9 +52,28 @@ const objarr1 = makeObjectFromArray([
 ]);
 console.log(objarr1);
 
-function makeArrayFromObject(o) {}
+function makeArrayFromObject(obj) {
+  const arr = [];
+  for (const k in obj) {
+    arr.push([k, ...obj[k]]);
+  }
+
+  return arr;
+}
 
 console.log('🚀>>  arrobj:', makeArrayFromObject(objarr1));
 
-// -------------------------
-function copyObject(o) {}
+console.log('---------------');
+function copyObject(obj) {
+  // return { ...obj };
+  const ret = {};
+  for (const k in obj) {
+    ret[k] = obj[k];
+  }
+
+  return ret;
+}
+const kim = { nid: 3, nm: 'Hong', addr: 'Pusan' };
+const newKim = copyObject(kim); // shallow copy
+newKim.addr = 'Daegu';
+console.log(kim.addr !== newKim.addr);

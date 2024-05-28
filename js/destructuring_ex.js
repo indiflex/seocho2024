@@ -12,9 +12,25 @@ const f1_2 = function ({ id, name }) {
 
 const f1 = ({ id, name }) => console.log(id, name);
 
-const user = { id: 1, name: 'Hong' };
+const user = { id: 1, name: 'Hong', passwd: 'xxx', addr: 'Seoul' };
 const hong = { id: 1, name: 'Hong' };
 const lee = { id: 2, name: 'Lee' };
 f1(user);
 f1(hong);
 f1(lee);
+
+function p66(user) {
+  const { passwd, ...userInfo } = user;
+  console.log('🚀>>  userInfo:', userInfo);
+}
+p66(user);
+
+console.log('--------------------');
+function p67() {
+  const arr = [[{ id: 1 }], [{ id: 2 }, { id: 3 }]];
+
+  // const [[id1], [id2, id3]] = arr;
+  const [[{ id: id1 }], [{ id: id2 }, { id: id3 }]] = arr;
+  console.log(id1, id2, id3);
+}
+p67();
