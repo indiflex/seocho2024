@@ -18,3 +18,7 @@ console.log('u4=', u4, user === u4);
 console.log('u4.proto=', Object.getPrototypeOf(u4));
 
 console.log('__proto__', u4.__proto__);
+
+module.exports = {
+  a: 'AAAAAAAAAAAAAAA',
+};
