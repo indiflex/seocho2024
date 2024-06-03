@@ -14,6 +14,15 @@ const ret2 = classNames('', 'a b c', 'd', ' ', 'e');
 console.log('🚀>>  ret2:', ret2);
 assert.strictEqual(ret2, 'a b c d e');
 
-const ret3 = classNames('', ' a b  c ', ' d', ' ', 'e');
+// args: ['', ' a b  c ', ' d', ' ', 'e ']
+function classNames2(...args) {
+  return args
+    .join(' ') // '  a b  c  d  e '
+    .trim() // 'a b  c  d  e'
+    .split(' ') // ['a', 'b', ' ', 'c',  'd', ' ', 'e']
+    .filter(a => !!a.trim()) //['a', 'b', 'c', 'd', 'e']
+    .join(' '); // 'a b c d e'
+}
+const ret3 = classNames2('', ' a b  c ', ' d', ' ', 'e ');
 console.log('🚀>>  ret3:', ret3);
-// assert.strictEqual(ret3, 'a b c d e');
+assert.strictEqual(ret3, 'a b c d e');
