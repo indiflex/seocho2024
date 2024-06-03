@@ -18,9 +18,8 @@ assert.strictEqual(ret2, 'a b c d e');
 function classNames2(...args) {
   return args
     .join(' ') // '  a b  c  d  e '
-    .trim() // 'a b  c  d  e'
-    .split(' ') // ['a', 'b', ' ', 'c',  'd', ' ', 'e']
-    .filter(a => !!a.trim()) //['a', 'b', 'c', 'd', 'e']
+    .split(' ') // ['a', 'b', '', 'c',  'd', '', 'e']
+    .filter(a => !!a) // ['a', 'b', 'c', 'd', 'e']
     .join(' '); // 'a b c d e'
 }
 const ret3 = classNames2('', ' a b  c ', ' d', ' ', 'e ');
