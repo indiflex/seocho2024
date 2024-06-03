@@ -9,6 +9,11 @@ assert.deepStrictEqual(ret1, ['1', '2', '3', 'true']);
 // 2) 다음과 같이 작동하는 classNames 함수를 작성하시오.
 // const classNames = (...args) => args.join(' '); // 공백 문제!
 const classNames = (...args) => args.filter(a => !!a.trim()).join(' ');
+// ['', 'a b  c ', 'd', ' ', 'e'].filter
 const ret2 = classNames('', 'a b c', 'd', ' ', 'e');
 console.log('🚀>>  ret2:', ret2);
-// assert.strictEqual(ret2, 'a b c d e');
+assert.strictEqual(ret2, 'a b c d e');
+
+const ret3 = classNames('', ' a b  c ', ' d', ' ', 'e');
+console.log('🚀>>  ret3:', ret3);
+// assert.strictEqual(ret3, 'a b c d e');
