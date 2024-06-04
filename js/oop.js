@@ -16,14 +16,14 @@ class Animal {
 const ani = new Animal('Ani');
 ani.bark();
 
-class Dog extends Animal {
+export class Dog extends Animal {
   // overriding
   bark() {
     console.log('Bow wow!!!');
   }
 }
 
-class Cat extends Animal {
+export default class Cat extends Animal {
   #age = 10; // private
   bark() {
     console.log('miaow~', this.#age, this.name);
