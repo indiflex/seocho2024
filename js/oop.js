@@ -23,6 +23,8 @@ export class Dog extends Animal {
   }
 }
 
+module.export = {...}
+
 export default class Cat extends Animal {
   #age = 10; // private
   bark() {

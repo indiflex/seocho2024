@@ -2,6 +2,7 @@
 import moment from 'moment'; // ESM 방식
 // import { Cat } from './oop.js';
 import Cat, { Dog } from './oop.js';
+// const Cat = require('oop.js');
 
 const locale = 'ko';
 // moment.locale('ko');
