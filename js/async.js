@@ -16,4 +16,6 @@ const getUserName = async userId => {
   return data?.name;
 };
 
-console.log('1번 유저명:', await getUserName(1));
+(async function f() {
+  console.log('1번 유저명:', await getUserName(1));
+})();
