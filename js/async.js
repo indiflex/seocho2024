@@ -8,6 +8,9 @@ const getUserName = async userId => {
   // const res = await fetch(URL + '/users/1');
   const res = await fetch(`${URL}/users/${userId}`);
   // console.log('🚀>>  res:', res);
+  await new Promise((resolve, reject) => {
+    setTimeout(() => resolve('OK'), 2000);
+  });
   const data = await res.json();
   // console.log('🚀>>  data:', data);
   return data?.name;
