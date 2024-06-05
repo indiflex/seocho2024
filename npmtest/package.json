@@ -11,6 +11,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "seochojade": "^0.1.0-beta.3"
+    "seochojade": "^0.1.1"
   }
 }
