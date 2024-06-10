@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  li {
+    @apply p-2;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply bg-red-300 text-white rounded-lg px-3 ml-5 hover:bg-red-900;
+  }
+
+  .btn-primary {
+    @apply bg-blue-300 text-white rounded-lg px-3 ml-5 hover:bg-blue-900;
+  }
+}
+
+@layer utilities {
+  .ppx {
+    @apply p-6 m-3;
+  }
+}
