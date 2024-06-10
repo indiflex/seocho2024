@@ -1,0 +1,17 @@
+{
+  "name": "tw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "tw": "tailwindcss -i ./src/input.css -o ./src/output.css",
+    "tw-watch": "tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.4"
+  }
+}
