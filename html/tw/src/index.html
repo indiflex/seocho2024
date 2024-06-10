@@ -11,15 +11,36 @@
 </head>
 
 <body>
-  <h1 class="text-3xl font-bold underline hover:text-red-500 ">
-    Hello world!
+  <h1 class="text-xl font-bold underlinex hover:text-red-500 ">
+    Reduce [1,2,3,4,5] 🛬
+    <span id="result"></span>
   </h1>
-  <input type="text" id="inp" value="1234" class="bg-yellow-500 focus:bg-slate-300" placeholder="...">
-  <h3 class="text-red-500 text-2xl">RED</h3>
 
-  <button class="bg-red-300 text-white rounded-lg px-3 ml-5 hover:bg-red-900">BTN</button>
-  <button class="btn">BTN2</button>
-  <button class="btn-primary">BTN3</button>
+  <div class="flex">
+    <div class="border border-purple-500 p-3 grid gap-3">
+      <button onclick="appendFn('square')" class="btn-primary">Square(^2)</button>
+      <button onclick="appendFn('cube')" class="btn-primary">Cube(^3)</button>
+      <button onclick="appendFn('sqrt')" class="btn-primary">Root(√)</button>
+    </div>
+    <div class="border border-red-500 p-3">
+      <div id="fn-group"></div>
+      <div class="flex">
+        <button onclick="cancel()" class="btn-danger">Cancel</button>
+        <button onclick="run()" class="btn-primary">Run</button>
+      </div>
+    </div>
+  </div>
+
+  <form onsubmit="submitForm(event)">
+    <input type="text" id="inp" value="1234" class="bg-yellow-500 focus:bg-slate-300" placeholder="...">
+  </form>
+  <h3 class="text-red-500 text-2xl" onclick="alert('red')">RED</h3>
+
+  <div class="btn-group border-2 border-purple-500 p-3 cursor-pointer">
+    <button class="bg-red-300 text-white rounded-lg px-3 ml-5 hover:bg-red-900">BTN</button>
+    <button class="btn">BTN2</button>
+    <button class="btn-primary">BTN3</button>
+  </div>
   <ul id="ull">
     <li class="first:mt-5 ppx">111</li>
     <li class="last:mb-5">222</li>

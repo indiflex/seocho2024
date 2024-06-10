@@ -13,6 +13,10 @@
     @apply bg-red-300 text-white rounded-lg px-3 ml-5 hover:bg-red-900;
   }
 
+  .btn-danger {
+    @apply bg-red-300 text-white rounded-lg px-3 ml-5 hover:bg-red-900;
+  }
+
   .btn-primary {
     @apply bg-blue-300 text-white rounded-lg px-3 ml-5 hover:bg-blue-900;
   }
