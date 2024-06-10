@@ -1,0 +1,35 @@
+.highlight {
+  background-color: yellow;
+}
+
+/* 형제 모두 */
+.highlight ~ input {
+  background-color: green;
+}
+
+/* 바로 옆에 형제만 */
+input#num + input {
+  margin-left: 20px;
+}
+
+#header {
+  font-size: 64px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+.white {
+  color: white;
+}
+.red {
+  color: red;
+}
+.bg-red {
+  background-color: red;
+}
+
+.fav-color {
+  color: #ff88aa;
+}

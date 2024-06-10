@@ -5,19 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>First HTML</title>
-  <style>
-    .highlight {
-      background-color: yellow;
-    }
-
-    #header {
-      font-size: 64px;
-    }
-
-    nav>ul {
-      list-style-type: none;
-    }
-  </style>
+  <!-- <link rel="stylesheet" href="a.css"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style></style>
 </head>
 
 <body>
@@ -26,16 +17,120 @@
     <h3>First HTML 333</h3>
     <p id="header">그냥 텍스트</p>
   </header>
-  <container>
+  <button class="btn btn-danger">danger</button>
+  <button class="btn btn-primary">primary</button>
+  <button class="btn btn-success">success</button>
+  <button class="btn btn-warning">warning</button>
+  <button class="btn btn-secondary">secondary</button>
+  <button class="btn btn-dark">dark</button>
+  <button class="btn btn-link">link</button>
+
+  <div class="container text-center">
+    <div class="row">
+      <div class="col border">col</div>
+      <div class="col border">col</div>
+      <div class="col border">col</div>
+      <div class="col border">col</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-8 border bg-primary">col-8</div>
+      <div class="col-sm-12 col-md-6 col-lg-4 border bg-danger">col-4</div>
+    </div>
+  </div>
+
+  <div class="container m-5 bg-success p-3">
+    <form>
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div>
+        <div class="mb-3 col">
+          <label for="passwd" class="form-label">Password</label>
+          <input type="email" class="form-control" id="passwd" placeholder="password...">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+      </div>
+
+      <div class="mt-2 d-flex justify-content-around">
+        <button class="btn btn-lg btn-secondary">Cancel</button>
+        <button class="btn btn-lg btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container border mt-5">
+    <div class="input-group m-3">
+      <span class="input-group-text">₩</span>
+      <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+      <span class="input-group-text">원</span>
+    </div>
+  </div>
+
+  <nav>
     <div class="highlight">highlight...</div>
+    <input type="text" id="num" value="num" class="red white">
+    <input type="number" value="5" style="color: white" class="red">
+    <input type="tel" value="010-2222-3333" class="white">
+    <input type="email" value="aaa@gmail.com" class="fav-color form-control">
+
     <ul>
-      <li>111</li>
-      <li>222</li>
-      <li>333</li>
-      <li>444</li>
-      <li>555</li>
+      <li>aaa</li>
+      <li>bbb</li>
     </ul>
-  </container>
+    <button class="bg-red white">Button</button>
+    <div class="container">
+      <ul>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+        <li>555</li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+      aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username"
+      aria-describedby="basic-addon2">
+    <span class="input-group-text" id="basic-addon2">@example.com</span>
+  </div>
+
+  <div class="mb-3">
+    <label for="basic-url" class="form-label">Your vanity URL</label>
+    <div class="input-group">
+      <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
+    </div>
+    <div class="form-text" id="basic-addon4">Example help text goes outside the input group.</div>
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">$</span>
+    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+    <span class="input-group-text">.00</span>
+  </div>
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+    <span class="input-group-text">@</span>
+    <input type="text" class="form-control" placeholder="Server" aria-label="Server">
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-text">With textarea</span>
+    <textarea class="form-control" aria-label="With textarea"></textarea>
+  </div>
 
   <footer>Copyright 2024 by Jade</footer>
 </body>
