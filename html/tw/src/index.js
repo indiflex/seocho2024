@@ -9,6 +9,7 @@ const fns = [];
 const $fngrp = document.getElementById('fn-group');
 
 function appendFn(f) {
+  console.log('arguments=', arguments);
   fns.push(FN[f]);
   const p = document.createElement('p');
   p.innerText = f;
