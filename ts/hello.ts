@@ -184,3 +184,65 @@ function xfn1(x: number): number {
   return x ** 2;
 }
 var xfn2 = (x: number): number => x ** 2;
+
+console.log('------------------');
+function logSong(song: string) {
+  if (!song) {
+    return; // OK!  return undefined; 도 OK!
+  }
+  console.log(`${song}`);
+  return true;
+}
+
+type VoidReturn = () => void;
+const test2: VoidReturn = () => 11; // OK!
+
+console.log('------------------');
+let songLogger: (song: string) => void;
+
+songLogger = song => {
+  console.log(`${song}`);
+  return true; // OK
+};
+// const bb = void(console.log('xxx'))
+const b = songLogger('HeartBeat'); // OK
+//
+// var v: void;
+// v = undefined;
+// v = null;
+
+// if (songLogger('HeartBeat')) console.log('*******');
+
+// function overload (cf. C++ or Java)
+// function add(a, b) { return a + b };
+// function add(a, b, c) { return a + b + c + 100 };
+// add(1, 2);
+// add(1, 2, 3);
+
+// in TS: 선언부
+function mul(a: number, b: number): number;
+function mul(a: number, b: number, c: number): number;
+
+// 구현부
+function mul(a: number, b: number, c?: number) {
+  if (typeof c === 'number') return a * b * c;
+  return a * b * 1000;
+}
+
+console.log(mul(1, 2)); // 마치 다른 함수인 것 처럼
+console.log(mul(1, 2, 3));
+
+function fff(this: { x: string; y: number }) {
+  console.log(this.x, this.y);
+}
+const fffx = fff.bind({ x: 'xxx', y: 123 });
+fffx();
+
+const yuser = {
+  id: 1,
+  getId() {
+    return this.id;
+  },
+};
+
+console.log(yuser.getId());
