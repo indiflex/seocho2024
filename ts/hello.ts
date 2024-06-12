@@ -56,19 +56,131 @@ type Member = {
   name: string;
   addr: string;
   discountRate: number;
+  spend: number[];
 };
 type Guest = {
   name: string;
   age: number;
+  spend: number;
 };
 
 const member: Member = {
   name: '홍길동',
   addr: '용산구',
   discountRate: 0.1,
+  spend: [1, 2],
 };
 const guest: Guest = {
   name: '김길동',
   age: 28,
+  spend: 1,
 };
 const who = Math.random() > 0.5 ? member : guest;
+who.name = 'Lee';
+
+// addr property가 있다라는 것은 Member type!
+if ('addr' in who) console.log(who.discountRate);
+// if (who.hasOwnProperty('addr')) console.log(who.discountRate);
+// if (Reflect.has(who, 'addr')) console.log(who.discountRate);
+// if (typeof who.spend === 'object') console.log(who.discountRate);
+console.log('typeof who.spend=', typeof who.spend);
+if (typeof who.spend === 'number') {
+  console.log('who.spend.toFixed=', who.spend.toFixed(2));
+} else {
+  console.log('who.spend.length=', who.spend.length);
+}
+
+let xarr: number[] | number = Math.random() > 0.5 ? 1 : [1, 2];
+if (Array.isArray(xarr)) console.log(xarr.length);
+
+let gildong = Math.random() > 0.5 && 'HongGilDong';
+
+if (gildong) {
+  gildong.toUpperCase(); // string
+} else {
+  // '' | false
+  gildong; // false | string
+}
+
+let a: string | undefined;
+console.log(a?.length);
+
+const hong = { id: 1, name: 'Hong', addr: 'Seoul' };
+const users = [hong, { id: 2, name: 'Kim' }];
+
+console.log(users.find(user => user.id === 3)?.['name']);
+
+function getHong() {
+  return { id: 1, name: 'Hong', addr: 'Seoul' };
+}
+
+let xuser: XUser;
+let xemp: XEmp;
+xuser = { id: 1, name: 'Hong' };
+// xuser = { id: 1, name: 'Hong', addr: 'Seoul' }; // freshness
+xuser = { id: 1, name: 'Hong', addr: 'Seoul' } as XUser; // freshness off
+xuser = hong; // freshness off
+xuser = getHong();
+xemp = { id: 1, name: 'Lee', addr: 'Pusan' };
+xuser = xemp; // (id, name) <== (id, name, addr) : covariance
+// xemp = xuser; // (id, name, addr) <== (id, name) : contravariance
+
+function getX1(obj: XUser) {
+  return obj.name;
+}
+function getX2(obj: XEmp) {
+  return obj.name;
+}
+
+function ff(f: typeof getX1) {}
+
+// console.log('getX=', getX(xuser));
+// console.log('getX=', getX(xemp));
+
+type XUser = { id: number; name: string };
+type XEmp = { id: number; name: string; addr: string };
+
+type XUser2 = { id: number; name: string; age: number };
+const xx: XUser2 | XEmp = { id: 1, name: 'xx', addr: 'xxx', age: 3 };
+
+const introduce = (name: string, height?: number | string) => {
+  console.log(`이름 : ${name}`);
+  // console.log(`키 : ${height ?? 0 + 10}`);
+  // if (height) console.log(`키 : ${height + 10}`); // 'x10' or +10
+
+  if (typeof height === 'number') console.log(`키 : ${height + 10}`);
+  else if (height) console.log(`키 : ${height || '' + 10}`); // 'x10'
+  // else  console.log(`키 : ${height || '' + 10}`); // 'x10'
+  //Error : 'height' is possibly 'undefined'.
+};
+
+introduce('김현준'); // OK
+introduce('김현준', undefined); // OK
+introduce('김현준', 170); // OK
+let hh = Math.random() > 0.5 ? 1 : 'x';
+if (typeof hh === 'number') introduce('김현준', hh); // OK
+
+const introduce3 = (name: string, age: number, height?: number) => {
+  console.log(`이름 :  ${name}`);
+  console.log(`나이 : ${age} 살`);
+  if (height) {
+    return console.log(`키 ${height + 10}cm`);
+  }
+};
+introduce3('xx', 2);
+introduce3('xx', 1, 2);
+console.log('------------------');
+
+// (name: string, age: number, height = 0) => void
+const introduce4 = (name: string, age: number, height = 0) => {
+  console.log(`이름 :  ${name}`);
+  console.log(`나이 : ${age} 살`);
+  console.log(`키 ${height + 10}cm`);
+};
+introduce4('xx', 2);
+introduce4('xx', 1, 2);
+
+function xfn1(x: number): number {
+  return x ** 2;
+}
+var xfn2 = (x: number): number => x ** 2;
