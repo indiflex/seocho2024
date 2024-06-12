@@ -8,5 +8,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@types/uuid": "^9.0.8",
+    "uuid": "^10.0.0"
+  }
 }

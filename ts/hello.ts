@@ -246,3 +246,245 @@ const yuser = {
 };
 
 console.log(yuser.getId());
+
+const oneToTen = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+console.log(oneToTen[400]?.toFixed(2));
+
+interface NaverKakaoUser {
+  id: number;
+  // nickname?: string;
+  // name?: string;
+  // email: string;
+  [k: string]: string | number; // index signature
+}
+
+const kUser: NaverKakaoUser = { id: 1, nick: 'aaa', age: 12 };
+
+type T = { id: number; getId: () => number };
+
+interface Ani {
+  id: number;
+  getId: () => number;
+}
+interface Animal extends Ani {
+  bark: () => void;
+}
+
+class Dog implements Animal {
+  id = 1;
+  getId() {
+    return this.id;
+  }
+  bark() {
+    console.log('bow wow!');
+  }
+}
+const lucy = new Dog();
+console.log(lucy.id, lucy.getId());
+lucy.bark();
+
+const ix2: T = {
+  id: 1,
+  getId() {
+    return this.id;
+  },
+};
+
+type TT = T & { bark: () => void };
+const ix3: TT = {
+  id: 1,
+  getId() {
+    return this.id;
+  },
+  bark() {
+    console.log('TTTTTTTTT');
+  },
+};
+
+const nums1 = [1, 2, 3, 4, 5]; // number[]
+const nums2 = [10, 20, 30, 40, 50]; // number[]
+
+const result1 = nums1.concat(nums2);
+// 당연히 result1은 number[]
+
+const strings1 = ['lim', 'eun', 'ha'];
+// const result2: (string | number)[] = result1.concat(strings1);
+const result2 = [...result1, ...strings1];
+
+function frest(...args: (string | number)[]) {
+  console.log('XXXX=', args.length);
+}
+
+function frest2(a: string | number, b: string | number, c: string | number) {
+  console.log('XXXX2=', a, b, c);
+}
+
+function frest3({ id, name }: { id: number; name: string }) {
+  console.log(id, name);
+}
+frest3({ id: 1, name: 'Hong' });
+
+frest('a', 'b', 1);
+frest2('a', 'b', 1);
+const arr1 = ['a', 'b', 1];
+frest(...arr1); // frest('a', 'b', 1);
+
+let arr2 = [1, 2, 3] as const;
+arr2 = [1, 2, 3];
+
+type IdNameDidoutAddr = [number, string, boolean, string];
+let tuple1: IdNameDidoutAddr;
+tuple1 = [2, 'a', false, 'Seoul'];
+
+function tf(id: number, name: string, didOut: boolean, addr: string) {
+  console.log(arguments);
+}
+tf(1, 'a', false, 'Seoul');
+
+function tf2(params: IdNameDidoutAddr) {
+  console.log(params);
+}
+tf2([1, 'a', false, 'Seoul']);
+tf2(tuple1); // Key Point!!
+
+// const { v4 } = require('uuid');
+// import { v4 } from '@types/uuid';
+import { v4 } from 'uuid';
+import { v4 as vv4 } from 'uuid';
+console.log(v4());
+console.log(v4());
+
+const Subjects = ['A', 'B', 'C'] as const; // assertion
+enum Ss {
+  국어, // = v4(),
+  영어, // = v4(),
+  수학, // = v4(),
+}
+
+const sub: Ss = Ss.국어;
+const sub2: Ss = Ss.수학;
+if (sub === Ss.국어) {
+}
+
+const arr3: [number, number, number] = [1, 2, 3];
+const sub3 = { id: 'A' } as const;
+// sub3.id = 'B';
+
+type TA = [string, number];
+const ta1: TA = ['aaa', 111];
+type TB = [boolean, TA];
+type TB2 = [boolean, ...TA];
+const tb1: TB = [true, ta1];
+console.log('🚀  tb1:', tb1);
+const tb2: TB2 = [true, ...ta1];
+console.log('🚀  tb2:', tb2);
+
+type AA = (string | number)[];
+type CC = [boolean, AA];
+const cc: CC = [false, [1, 2, 'a']];
+
+const SIZE = [
+  { id: 'XS', price: 8000 },
+  { id: 'S', price: 10000 },
+  { id: 'M', price: 12000 },
+  { id: 'L', price: 14000 },
+  { id: 'XL', price: 15000 },
+] as const;
+
+const sizeOption = { XS: 1, S: 5, M: 2, L: 2, XL: 4 };
+
+const totalPrice = SIZE.reduce(
+  (currPrice, size) => currPrice + sizeOption[size.id] * size.price,
+  0
+);
+
+// type Page = { page: number };
+// type Title = { title: string };
+// type PageTitle = Page | Title;
+
+// const x1: PageTitle = { title: 'aaa' };
+// const x2: PageTitle = { title: 'aaa', page: 2 };
+// const x3: PageTitle = { page: 2 };
+
+// console.log(x1.title, x3.page);
+// if ('title' in x2) console.log(x2.title);
+
+// interface IPage {
+//   page: number;
+// }
+// interface ITitle {
+//   title: string;
+// }
+// interface IPageTitle extends Page, Title {}
+
+// const ifx2: IPageTitle = { title: 'aaa', page: 2 };
+
+interface Page {
+  readonly text: string;
+}
+function read(page: Page) {
+  console.log(page.text);
+
+  // page.text = 'Hello';
+}
+
+const pageIsh = {
+  text: 'Hello, world!',
+};
+pageIsh.text = 'Hello'; //OK
+
+read(pageIsh);
+
+Object.freeze(pageIsh);
+// pageIsh.text = 'xx';
+console.log(pageIsh);
+
+const counts: { apple?: number; banana?: number } = {};
+
+counts.apple = 3;
+counts.banana = 5;
+
+interface IndexSignature {
+  // [key: number]: string;
+  [key: string]: number | string;
+}
+
+const is: IndexSignature = {
+  0: 'hello', // '0': 'hello'
+  // name: 'hong',
+  age: 26,
+};
+
+declare global {
+  interface Array<T> {
+    // Array interface 병합
+    first(): T;
+    mapBy(prop: string): T[];
+    filterBy: (prop: string, val: any) => T[];
+  }
+}
+
+Array.prototype.first = function () {
+  return this[0];
+};
+
+Array.prototype.mapBy = function (prop: string) {
+  return this.map(a => a[prop]);
+};
+
+Array.prototype.filterBy = function (prop: string, val: any) {
+  return this.filter(a => a[prop] === val);
+};
+
+const xusers = [
+  { id: 1, name: 'Hong' },
+  { id: 2, name: 'Kim' },
+];
+console.log(xusers.mapBy('name')); // ['Hong', 'Kim']
+console.log(xusers.mapBy('id')); // ['Hong', 'Kim']
+console.log(xusers.filterBy('name', 'Kim'));
+
+const arr5: number[] = [1, 2, 3];
+const arr6: Array<number> = [1, 2, 3];
+const arr7: Array<string | number> = ['1', 2, 3]; // (string|number)[]
