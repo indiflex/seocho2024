@@ -30,6 +30,8 @@ interface Animal {
 class Pet implements Animal {
   protected name;
   protected age?: number;
+  readonly explicit: string = 'Hello, Typescript';
+  readonly implicit = 'Hello, Typescript'; // Literal Type!
   constructor(name: string) {
     this.name = name;
   }
@@ -70,15 +72,15 @@ class Dog extends Pet {
 
 class Cat extends Pet {
   kukuki() {
-    console.log('꾹!꾹!');
+    kk();
   }
 
   bark() {
-    console.log('야옹!', this.name);
+    barkOfCat.bind(this)();
   }
 }
 
-const lucy = new Dog('Lucy', 10);
+const lucy: Dog = new Dog('Lucy', 10);
 lucy.bark();
 lucy.move();
 const maxx = new Dog('Max', 12);
@@ -89,3 +91,24 @@ const happy = new Cat('Happy');
 happy.setAge(5);
 happy.bark();
 happy.kukuki();
+
+interface ICat extends Animal {
+  kukuki(): void;
+}
+
+class CatDog extends Dog implements ICat {
+  kukuki() {
+    kk();
+  }
+  bark() {
+    barkOfCat.bind(this)();
+  }
+}
+
+function kk() {
+  console.log('꾹!꾹!');
+}
+
+function barkOfCat(this: Cat) {
+  console.log('야옹!', this.name);
+}
