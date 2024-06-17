@@ -112,3 +112,46 @@ function kk() {
 function barkOfCat(this: Cat) {
   console.log('야옹!', this.name);
 }
+
+const k = new CatDog('개냥이', 1);
+const d: Dog = k;
+const e: ICat = k;
+
+interface N {
+  id: number;
+}
+interface A extends N {
+  name: string;
+}
+
+type T1 = { id: number };
+type T2 = { name: string };
+type TTUser = T1 & T2;
+const hong: TTUser = { id: 1, name: 'Hong' };
+
+interface I1 {
+  id: number;
+}
+interface IUser extends I1 {
+  name: string;
+}
+// interface IUser extends I1, I2 {}
+const kim: IUser = { id: 2, name: 'Kim' };
+
+// Teacher는 StudentTeacher 하위 클래스의 인스턴스에서 사용할 수 있는 teach 메서드를 선언
+class Teacher {
+  teach() {
+    console.log('teaching!');
+  }
+}
+
+class StudentTeacher extends Teacher {
+  learn() {
+    console.log('Learning!');
+  }
+}
+const teacher = new StudentTeacher();
+
+teacher.teach(); // OK (기본 클래스에 정의됨)
+teacher.learn(); // OK (하위 클래스에 정의됨)
+// const teacher:Teacher = new StudentTeacher(); // OK
