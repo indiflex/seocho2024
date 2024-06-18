@@ -29,3 +29,26 @@ try {
   if (error instanceof Error) console.log(error.message);
   else console.log(error);
 }
+
+type Item = { item: string; price: number };
+// { item: string;  price: number}
+// type ItemPrice<T, U> = { item: 'X' | 'Y' | 'Z'; price: number };
+type ItemPriceX<T, U> = {
+  // [k in keyof T]: k extends 'item' ? keyof U : T[k];
+  [k in keyof T]: T[k];
+  // [k in keyof T]: keyof U;
+};
+
+const stock = { X: 1, Y: 2, Z: 30 };
+
+const itemPrices: ItemPrice<Item, typeof stock>[] = [
+  { item: 'X', price: 1000 },
+  { item: 'Y', price: 2000 },
+  { item: 'Z', price: 3000 },
+];
+
+const total = itemPrices.reduce(
+  (curr, itemPrice) => curr + stock[itemPrice.item] * itemPrice.price,
+  0
+);
+console.log('🚀  total:', total);
