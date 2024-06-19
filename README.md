@@ -1,5 +1,6 @@
 # seocho2024
 2024년 서초구 웹 개발 과정
+kick-off project
 
 
 # TypeScript
