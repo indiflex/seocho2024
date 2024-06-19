@@ -1,10 +1,6 @@
-// import PropTypes from "prop-types";
-
-// Hello.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   age: PropTypes.number,
-// }
 
 export default function Hello(props) {
-  return <h1>Hello, {props.name}! <small className="font-sm">({props.age})</small></h1>
+  return <h1 onClick={props.plusCount} style={{
+  cursor: 'pointer'
+}}>Hello, {props.name}! <small className="font-sm">({props.age})</small></h1>
 }
