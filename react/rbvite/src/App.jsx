@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Hello from './components/Hello';
+import My from './components/My';
 
 // mock
 const SampleSession = {
@@ -37,7 +38,8 @@ function App() {
       {/* <button onClick={toggleLogin}>
         Toggle {session.loginUser ? 'Logined' : 'NotLogined'}
       </button> */}
-      <button onClick={logout} className='ml-3'>SignOut</button>
+      
+      <My session={session} signOut={logout} />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
