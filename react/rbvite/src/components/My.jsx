@@ -1,8 +1,12 @@
+import Login from "./Login";
+import Profile from "./Profile";
+
 export default function My({session: {loginUser, cart}, signOut}) {
   return <>
-    <strong className='text-green-500'>{loginUser?.name}</strong> logined
-    <button onClick={signOut} className='ml-3'>SignOut</button>
-    <div className="border">
+    {loginUser ? <Profile name={loginUser?.name} signOut={signOut} />
+               : <Login />}
+    
+    <div className="border mt-5">
       <ul>
         {cart.map(item => (
           <li key={item.id}>
