@@ -10,7 +10,7 @@ export default function Input({ label, type = "text" }) {
           htmlFor={id}
           className="block text-sm font-medium leading-6 text-gray-900"
         >
-          {label} xxx
+          {label}
         </label>
       )}
       <div className="mt-2">

@@ -1,9 +1,9 @@
 import Button from "./atoms/Button";
 import Input from "./atoms/Input";
 
-export default function Login() {
+export default function Login({ singIn }) {
   return (
-    <div className="border border-red-300 p-5">
+    <form className="border border-red-300 p-5">
       <h2 className="text-center text-3xl font-semibold leading-7 text-green-500">
         Sign In
       </h2>
@@ -19,8 +19,18 @@ export default function Login() {
       </div>
 
       <div className="mt-3 flex justify-center">
-        <Button text="Sign In" type="primary" size="lg" className="px-5 py-1" />
+        <Button
+          onClick={(evt) => {
+            evt.preventDefault();
+            // evt.stopPropagation();
+            singIn("XXX");
+          }}
+          text="로그인"
+          type="primary"
+          size="lg"
+          className="px-5 py-1"
+        />
       </div>
-    </div>
+    </form>
   );
 }

@@ -3,13 +3,13 @@ import Profile from "./Profile";
 import Button from "./atoms/Button";
 import SampleAtoms from "./atoms/SampleAtoms";
 
-export default function My({ session: { loginUser, cart }, signOut }) {
+export default function My({ session: { loginUser, cart }, signOut, signIn }) {
   return (
     <>
       {loginUser ? (
         <Profile name={loginUser?.name} signOut={signOut} />
       ) : (
-        <Login />
+        <Login singIn={signIn} />
       )}
 
       <div className="mt-5 border">
