@@ -1,6 +1,7 @@
 import Login from "./Login";
 import Profile from "./Profile";
 import Button from "./atoms/Button";
+import SampleAtoms from "./atoms/SampleAtoms";
 
 export default function My({ session: { loginUser, cart }, signOut }) {
   return (
@@ -31,6 +32,8 @@ export default function My({ session: { loginUser, cart }, signOut }) {
         />
         <Button text="상품삭제" size="sm" type="danger" />
       </div>
+
+      <SampleAtoms />
     </>
   );
 }
