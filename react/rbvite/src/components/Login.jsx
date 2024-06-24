@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Button from "./atoms/Button";
 import Input from "./atoms/Input";
 
@@ -21,6 +21,10 @@ export default function Login({ singIn }) {
 
     singIn(nameRef.current.value);
   };
+
+  useEffect(() => {
+    if (nameRef.current) nameRef.current.focus();
+  }, [nameRef]);
 
   return (
     <form className="border border-red-300 p-5">

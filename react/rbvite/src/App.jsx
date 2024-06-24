@@ -54,6 +54,16 @@ function App() {
     setSession({ ...session, cart: [...session.cart, item] });
   };
 
+  const saveItem = (id, name, price) => {
+    const editingItem = { id, name, price };
+    setSession({
+      ...session,
+      cart: [
+        ...session.cart.map((item) => (item.id === id ? editingItem : item)),
+      ],
+    });
+  };
+
   return (
     <>
       <div>
@@ -75,6 +85,7 @@ function App() {
         signIn={login}
         removeItem={removeItem}
         addItem={addItem}
+        saveItem={saveItem}
       />
       <div className="card">
         <button
