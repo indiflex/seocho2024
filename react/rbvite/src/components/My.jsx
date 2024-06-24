@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   FaCartPlus,
   FaUndoAlt,
@@ -73,6 +73,41 @@ export default function My({
     setEditingItem(null);
   };
 
+  // test useEffect
+  const [time, setTime] = useState(
+    Math.round(new Date().getTime() / 1000) % 1000,
+  );
+  useEffect(() => {
+    const intl = setInterval(() => {
+      // console.log("time=", time);
+      setTime((time) => time + 1);
+    }, 1000);
+
+    return () => {
+      console.log("🚀  intl clear!!");
+      clearInterval(intl);
+    };
+  }, []);
+
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    console.log("fetch!!!");
+    fetch("https://jsonplaceholder.typicode.com/posts?userId=2", signal)
+      .then((res) => res.json())
+      .then((data) => setPosts(data));
+
+    return () => {
+      console.log("abort!!");
+      controller.abort();
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    console.log("useLayoutEffect!!!!!!");
+  }, []);
+
   return (
     <>
       {loginUser ? (
@@ -80,6 +115,10 @@ export default function My({
       ) : (
         <Login singIn={signIn} />
       )}
+
+      <h1>
+        Second: {time} - posts: {posts.length}
+      </h1>
 
       <div className="my-5 border text-center">
         <ul>
