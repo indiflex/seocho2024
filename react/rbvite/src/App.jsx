@@ -6,8 +6,8 @@ import My from "./components/My";
 
 // mock
 const SampleSession = {
-  // loginUser: { id: 1, name: "Hong", age: 33 },
-  loginUser: null,
+  loginUser: { id: 1, name: "Hong", age: 33 },
+  // loginUser: null,
   cart: [
     { id: 100, name: "라면", price: 3000 },
     { id: 101, name: "컵라면", price: 2000 },
@@ -47,6 +47,13 @@ function App() {
     });
   };
 
+  const addItem = (name, price) => {
+    const id = Math.max(...session.cart.map((item) => item.id)) ?? 0;
+    const item = { id: id + 1, name, price };
+    console.log("🚀  id:", id);
+    setSession({ ...session, cart: [...session.cart, item] });
+  };
+
   return (
     <>
       <div>
@@ -67,6 +74,7 @@ function App() {
         signOut={logout}
         signIn={login}
         removeItem={removeItem}
+        addItem={addItem}
       />
       <div className="card">
         <button

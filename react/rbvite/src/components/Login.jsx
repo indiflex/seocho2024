@@ -18,6 +18,7 @@ export default function Login({ singIn }) {
       else passwdRef.current.focus();
       return;
     }
+
     singIn(nameRef.current.value);
   };
 
