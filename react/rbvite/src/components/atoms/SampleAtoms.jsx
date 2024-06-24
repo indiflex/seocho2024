@@ -1,3 +1,5 @@
+import Input from "./Input";
+
 export default function SampleAtoms() {
   return (
     <>
@@ -6,9 +8,7 @@ export default function SampleAtoms() {
         <button className="btn-primary text-xs">BTN-PRIMARY</button>
         <button className="btn-danger text-lg">BTN-DANGER</button>
       </div>
-      <div>
-        <input type="text" />
-      </div>
+      <Input />
     </>
   );
 }
