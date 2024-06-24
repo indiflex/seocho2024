@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+@layer components {
+  .btn {
+    @apply ml-5 rounded-lg bg-red-300 px-3 text-white hover:bg-red-900;
+  }
+
+  .btn-danger {
+    @apply ml-5 rounded-lg bg-red-300 px-3 text-white hover:bg-red-900;
+  }
+
+  .btn-primary {
+    @apply ml-5 rounded-lg bg-blue-300 px-3 text-white hover:bg-blue-900;
+  }
+}
+
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -78,4 +92,4 @@ button:focus-visible {
 h1:hover {
   color: blue;
   text-decoration: underline;
-}
+} */
