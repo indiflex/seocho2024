@@ -4,15 +4,15 @@
 
 @layer components {
   .btn {
-    @apply ml-5 rounded-lg bg-red-300 px-3 text-white hover:bg-red-900;
+    @apply m-1 rounded-lg bg-slate-500 px-2 text-white hover:bg-slate-900;
   }
 
   .btn-danger {
-    @apply ml-5 rounded-lg bg-red-300 px-3 text-white hover:bg-red-900;
+    @apply m-1 rounded-lg bg-red-500 px-2 text-white hover:bg-red-900;
   }
 
   .btn-primary {
-    @apply ml-5 rounded-lg bg-blue-300 px-3 text-white hover:bg-blue-900;
+    @apply m-1 rounded-lg bg-blue-500 px-2 text-white hover:bg-blue-900;
   }
 }
 

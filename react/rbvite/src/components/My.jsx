@@ -23,6 +23,13 @@ export default function My({ session: { loginUser, cart }, signOut }) {
           ))}
         </ul>
         <Button text="상품추가" />
+        <Button
+          text="상품수정"
+          type="primary"
+          size="xs"
+          className="mx-5 font-semibold"
+        />
+        <Button text="상품삭제" size="sm" type="danger" />
       </div>
     </>
   );
