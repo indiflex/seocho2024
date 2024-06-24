@@ -3,7 +3,12 @@ import Profile from "./Profile";
 import Button from "./atoms/Button";
 import SampleAtoms from "./atoms/SampleAtoms";
 
-export default function My({ session: { loginUser, cart }, signOut, signIn }) {
+export default function My({
+  session: { loginUser, cart },
+  signOut,
+  signIn,
+  removeItem,
+}) {
   return (
     <>
       {loginUser ? (
@@ -12,25 +17,28 @@ export default function My({ session: { loginUser, cart }, signOut, signIn }) {
         <Login singIn={signIn} />
       )}
 
-      <div className="mt-5 border">
+      <div className="my-5 border text-center">
         <ul>
-          {cart.map((item) => (
-            <li key={item.id}>
-              {item.name}
-              <small className="ml-2 p-3 pl-2 pr-2 text-gray-300">
-                ({item.price.toLocaleString()}원)
-              </small>
-            </li>
-          ))}
+          {cart?.length
+            ? cart.map((item) => (
+                <li key={item.id} className="flex justify-around border-b">
+                  <strong>
+                    {item.name}
+                    <small className="ml-2 text-gray-300">
+                      ({item.price.toLocaleString()}원)
+                    </small>
+                  </strong>
+                  <Button
+                    onClick={() => removeItem(item.id)}
+                    type="danger"
+                    text="X"
+                    size="xs"
+                  />
+                </li>
+              ))
+            : "장바구니가 비었습니다."}
         </ul>
-        <Button text="상품추가" />
-        <Button
-          text="상품수정"
-          type="primary"
-          size="xs"
-          className="mx-5 font-semibold"
-        />
-        <Button text="상품삭제" size="sm" type="danger" />
+        <Button text="+ 상품추가" className="mt-5" />
       </div>
 
       <SampleAtoms />

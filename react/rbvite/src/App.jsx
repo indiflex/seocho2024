@@ -6,8 +6,8 @@ import My from "./components/My";
 
 // mock
 const SampleSession = {
-  loginUser: { id: 1, name: "Hong", age: 33 },
-  // loginUser: null,
+  // loginUser: { id: 1, name: "Hong", age: 33 },
+  loginUser: null,
   cart: [
     { id: 100, name: "라면", price: 3000 },
     { id: 101, name: "컵라면", price: 2000 },
@@ -31,8 +31,20 @@ function App() {
   const logout = () => setSession({ ...session, loginUser: null });
 
   const login = (name) => {
-    const loginUser = session.loginUser;
-    setSession({ ...session, loginUser: { ...loginUser, name } });
+    const id = 1;
+    const age = 33;
+    const x = {
+      ...session,
+      loginUser: { ...session.loginUser, id, name, age },
+    };
+    setSession(x);
+  };
+
+  const removeItem = (itemId) => {
+    setSession({
+      ...session,
+      cart: [...session.cart.filter((item) => item.id !== itemId)],
+    });
   };
 
   return (
@@ -50,7 +62,12 @@ function App() {
         Toggle {session.loginUser ? 'Logined' : 'NotLogined'}
       </button> */}
 
-      <My session={session} signOut={logout} signIn={login} />
+      <My
+        session={session}
+        signOut={logout}
+        signIn={login}
+        removeItem={removeItem}
+      />
       <div className="card">
         <button
           onClick={() => {
