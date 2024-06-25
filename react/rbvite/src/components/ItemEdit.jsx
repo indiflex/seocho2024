@@ -7,7 +7,7 @@ export default function ItemEdit({ cancel, save, item }) {
   const nameRef = useRef();
   const priceRef = useRef();
 
-  console.log("******************", item);
+  // console.log("******************", item);
 
   const saveItem = (evt) => {
     evt.preventDefault();
