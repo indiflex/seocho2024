@@ -1,4 +1,4 @@
-import { memo, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import Login from "./Login";
 import Profile from "./Profile";
@@ -72,7 +72,7 @@ export default function My({
     return cart?.reduce((acc, item) => acc + item.price, 0);
   }, [cart]);
 
-  const MemoedItemEdit = memo(ItemEdit);
+  // const MemoedItemEdit = memo(ItemEdit);
 
   return (
     <>
