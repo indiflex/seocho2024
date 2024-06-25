@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import Button from "./atoms/Button";
 import SampleAtoms from "./atoms/SampleAtoms";
 import ItemEdit from "./ItemEdit";
+// import ItemEdit, { MemoedItemEdit } from "./ItemEdit";
 
 export default function My({
   session: { loginUser, cart },
@@ -65,14 +66,12 @@ export default function My({
     // console.debug("useLayoutEffect!!!!!!");
   }, []);
 
-  const addingItem = useMemo(() => ({ name: "", price: 1000 }), []);
+  const addingItem = useMemo(() => ({ name: "x", price: 1000 }), []);
 
   const totalPrice = useMemo(() => {
     // console.log("ttttttttttttttt");
     return cart?.reduce((acc, item) => acc + item.price, 0);
   }, [cart]);
-
-  // const MemoedItemEdit = memo(ItemEdit);
 
   return (
     <>
@@ -134,7 +133,6 @@ export default function My({
         {isAdding ? (
           <ItemEdit item={addingItem} cancel={cancelAdding} save={addItem} />
         ) : (
-          // <MemoedItemEdit />
           <Button
             onClick={() => setIsAdding(true)}
             text="+ 상품추가"
