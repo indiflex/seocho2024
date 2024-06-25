@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { memo, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import Login from "./Login";
 import Profile from "./Profile";
@@ -67,6 +67,13 @@ export default function My({
 
   const addingItem = useMemo(() => ({ name: "", price: 1000 }), []);
 
+  const totalPrice = useMemo(() => {
+    // console.log("ttttttttttttttt");
+    return cart?.reduce((acc, item) => acc + item.price, 0);
+  }, [cart]);
+
+  const MemoedItemEdit = memo(ItemEdit);
+
   return (
     <>
       {loginUser ? (
@@ -121,9 +128,13 @@ export default function My({
               ))
             : "장바구니가 비었습니다."}
         </ul>
+        <h3 className="pl-1 text-left text-green-500">
+          * Total: {totalPrice.toLocaleString()}원
+        </h3>
         {isAdding ? (
-          <ItemEdit cancel={cancelAdding} save={addItem} item={addingItem} />
+          <ItemEdit item={addingItem} cancel={cancelAdding} save={addItem} />
         ) : (
+          // <MemoedItemEdit />
           <Button
             onClick={() => setIsAdding(true)}
             text="+ 상품추가"
@@ -131,6 +142,8 @@ export default function My({
           />
         )}
       </div>
+
+      {/* <MemoedItemEdit /> */}
 
       <SampleAtoms />
     </>
