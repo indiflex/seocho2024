@@ -14,6 +14,7 @@ const CountProvider = ({ children }) => {
   );
 };
 
+// CountContext (for count) Custom Hook
 const useCount = () => useContext(CountContext);
 
 // eslint-disable-next-line react-refresh/only-export-components
