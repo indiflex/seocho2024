@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import Button from "./atoms/Button";
 import Input from "./atoms/Input";
+import { useSession } from "../hooks/session-context";
 
-export default function Login({ singIn }) {
+export default function Login() {
+  const { login: signIn } = useSession();
   const nameRef = useRef();
   const passwdRef = useRef();
 
@@ -19,7 +21,7 @@ export default function Login({ singIn }) {
       return;
     }
 
-    singIn(nameRef.current.value);
+    signIn(nameRef.current.value);
   };
 
   useEffect(() => {

@@ -6,16 +6,18 @@ import Button from "./atoms/Button";
 import SampleAtoms from "./atoms/SampleAtoms";
 import ItemEdit, { MemoedItemEdit } from "./ItemEdit";
 import { useCount } from "../hooks/counter-context";
+import Hello from "./Hello";
+import { useSession } from "../hooks/session-context";
 // import ItemEdit, { MemoedItemEdit } from "./ItemEdit";
 
-export default function My({
-  session: { loginUser, cart },
-  signOut,
-  signIn,
-  removeItem,
-  addItem,
-  saveItem,
-}) {
+export default function My() {
+  const {
+    session: { loginUser, cart },
+    saveItem,
+    addItem,
+    removeItem,
+  } = useSession();
+
   const [isAdding, setIsAdding] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
 
@@ -86,11 +88,11 @@ export default function My({
 
   return (
     <>
-      {loginUser ? (
-        <Profile name={loginUser?.name} signOut={signOut} />
-      ) : (
-        <Login singIn={signIn} />
-      )}
+      <div>
+        <Hello name={loginUser.name} age={loginUser.age} />
+      </div>
+
+      {loginUser ? <Profile /> : <Login />}
 
       <h1>
         Second: {time} - {count}

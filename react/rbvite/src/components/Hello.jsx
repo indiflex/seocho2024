@@ -16,7 +16,7 @@ export default function Hello(props) {
         cursor: "pointer",
       }}
     >
-      Hello, {props.name}!{" "}
+      Hello, {props.name} !
       <small className="font-sm text-red-500">({props.age + 1})</small>
     </h1>
   );
