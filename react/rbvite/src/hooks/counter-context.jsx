@@ -6,9 +6,10 @@ const CountContext = createContext();
 const CountProvider = ({ children }) => {
   const [count, setCount] = useState(0);
   const plusCount = () => setCount((count) => count + 1);
+  const minusCount = () => setCount((count) => count - 1);
 
   return (
-    <CountContext.Provider value={{ count, plusCount }}>
+    <CountContext.Provider value={{ count, plusCount, minusCount }}>
       {children}
     </CountContext.Provider>
   );

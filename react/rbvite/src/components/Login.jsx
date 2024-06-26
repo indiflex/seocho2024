@@ -8,6 +8,8 @@ export default function Login() {
   const nameRef = useRef();
   const passwdRef = useRef();
 
+  console.log("Looooooooooooogin!!");
+
   const login = (evt) => {
     evt.preventDefault();
     // evt.stopPropagation();

@@ -1,4 +1,4 @@
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState, useCallback } from "react";
 
 const SessionContext = createContext();
 
@@ -13,48 +13,65 @@ const SampleSession = {
   ],
 };
 
-const SessionProvider = () => {
+const SessionProvider = ({ children }) => {
   const [session, setSession] = useState(SampleSession);
 
-  const logout = () => setSession({ ...session, loginUser: null });
+  const logout = useCallback(
+    () => setSession({ ...session, loginUser: null }),
+    [session],
+  );
 
-  const login = (name) => {
-    const id = 1;
-    const age = 33;
-    const x = {
-      ...session,
-      loginUser: { ...session.loginUser, id, name, age },
-    };
-    setSession(x);
-  };
+  const login = useCallback(
+    (name) => {
+      const id = 1;
+      const age = 33;
+      const x = {
+        ...session,
+        loginUser: { ...session.loginUser, id, name, age },
+      };
+      setSession(x);
+    },
+    [session],
+  );
 
-  const removeItem = (itemId) => {
-    setSession({
-      ...session,
-      cart: [...session.cart.filter((item) => item.id !== itemId)],
-    });
-  };
+  const removeItem = useCallback(
+    (itemId) => {
+      setSession({
+        ...session,
+        cart: [...session.cart.filter((item) => item.id !== itemId)],
+      });
+    },
+    [session],
+  );
 
-  const addItem = (addingItem) => {
-    const id = Math.max(...session.cart.map((item) => item.id)) ?? 0;
-    const { name, price } = addingItem;
-    const item = { id: id + 1, name, price };
-    console.log("🚀  id:", id);
-    setSession({ ...session, cart: [...session.cart, item] });
-  };
+  const addItem = useCallback(
+    (addingItem) => {
+      const id = Math.max(...session.cart.map((item) => item.id)) ?? 0;
+      const { name, price } = addingItem;
+      const item = { id: id + 1, name, price };
+      console.log("🚀  id:", id);
+      setSession({ ...session, cart: [...session.cart, item] });
+    },
+    [session],
+  );
 
-  const saveItem = (editingItem) => {
-    const { id, name, price } = editingItem;
-    const foundItem = session.cart.find((item) => item.id === id);
-    foundItem.name = name;
-    foundItem.price = price;
-    setSession({ ...session });
-  };
+  const saveItem = useCallback(
+    (editingItem) => {
+      const { id, name, price } = editingItem;
+      const foundItem = session.cart.find((item) => item.id === id);
+      foundItem.name = name;
+      foundItem.price = price;
+      setSession({ ...session });
+    },
+    [session],
+  );
 
   return (
     <SessionContext.Provider
       value={{ session, login, logout, removeItem, saveItem, addItem }}
-    ></SessionContext.Provider>
+    >
+      {children}
+    </SessionContext.Provider>
   );
 };
 
