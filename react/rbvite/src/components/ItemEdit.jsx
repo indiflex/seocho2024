@@ -51,13 +51,14 @@ export default function ItemEdit({ cancel, save, item }) {
 
 // 두 번째 인자(비교함수)가 true를 return 하면 ItemEdit 컴포넌트를 다시 생성하지 않는다.
 // 다만 비교함수는 매번 렌더링마다 호출된다!
+
+// export const MemoedItemEdit = memo(ItemEdit, () => true);
+// export const MemoedItemEdit = memo(
+//   ItemEdit,
+//   (a, b) => a.item === b.item,
+// );
+
 export const MemoedItemEdit = memo(ItemEdit, ({ item: a }, { item: b }) => {
   // console.log(a, b);
   return a === b;
 });
-// export const MemoedItemEdit = memo(ItemEdit, (a, b) => {
-//   console.log("a=", a.item);
-//   console.log("b=", b.item, a.item == b.item);
-//   // return a.item.name == b.item.name;
-//   return a.item === b.item;
-// });

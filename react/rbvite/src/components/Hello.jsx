@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 
 export default function Hello(props) {
+  // console.log("Heeeeeeeeelo!!");
+
   useEffect(() => {
-    // console.log("Heeeeeeeeelo");
+    // console.log("Hello - useEffect!!");
   }, []);
 
   return (

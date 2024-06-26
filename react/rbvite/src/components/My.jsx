@@ -4,7 +4,7 @@ import Login from "./Login";
 import Profile from "./Profile";
 import Button from "./atoms/Button";
 import SampleAtoms from "./atoms/SampleAtoms";
-import ItemEdit from "./ItemEdit";
+import ItemEdit, { MemoedItemEdit } from "./ItemEdit";
 // import ItemEdit, { MemoedItemEdit } from "./ItemEdit";
 
 export default function My({
@@ -66,10 +66,10 @@ export default function My({
     // console.debug("useLayoutEffect!!!!!!");
   }, []);
 
-  const addingItem = useMemo(() => ({ name: "x", price: 1000 }), []);
+  const addingItem = useMemo(() => ({ name: "", price: 1000 }), []);
 
   const totalPrice = useMemo(() => {
-    // console.log("ttttttttttttttt");
+    console.log("tttotalPrice>>");
     return cart?.reduce((acc, item) => acc + item.price, 0);
   }, [cart]);
 
@@ -131,7 +131,11 @@ export default function My({
           * Total: {totalPrice.toLocaleString()}원
         </h3>
         {isAdding ? (
-          <ItemEdit item={addingItem} cancel={cancelAdding} save={addItem} />
+          <MemoedItemEdit
+            item={addingItem}
+            cancel={cancelAdding}
+            save={addItem}
+          />
         ) : (
           <Button
             onClick={() => setIsAdding(true)}
@@ -140,8 +144,6 @@ export default function My({
           />
         )}
       </div>
-
-      {/* <MemoedItemEdit /> */}
 
       <SampleAtoms />
     </>
