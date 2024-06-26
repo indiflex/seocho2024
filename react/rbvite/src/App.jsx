@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import Hello from "./components/Hello";
 import My from "./components/My";
+import { useCount } from "./hooks/counter-context";
 
 // mock
 const SampleSession = {
@@ -17,13 +18,9 @@ const SampleSession = {
 
 function App() {
   const [session, setSession] = useState(SampleSession);
-  const [count, setCount] = useState(0);
   // const [didLogin, setDidLogin] = useState(true);
-  const plusCount = () => setCount((count) => count + 1);
-  // const plusCount = () => setCount((curr) => curr + 1);
-
   // console.log('Appppppppppppp!', count)
-
+  const { count, plusCount } = useCount();
   // const toggleLogin = () => {
   //   setDidLogin(!didLogin);
   // }
@@ -74,11 +71,7 @@ function App() {
     <>
       <div>
         {session.loginUser && (
-          <Hello
-            name={session.loginUser.name}
-            age={session.loginUser.age}
-            plusCount={plusCount}
-          />
+          <Hello name={session.loginUser.name} age={session.loginUser.age} />
         )}
       </div>
       {/* <button onClick={toggleLogin}>
@@ -94,14 +87,7 @@ function App() {
         saveItem={saveItem}
       />
       <div className="card">
-        <button
-          onClick={() => {
-            setCount((pre) => pre + 1);
-            // flushSync(() => setCount((count) => count + 1));
-          }}
-        >
-          count is {count}
-        </button>
+        <button onClick={plusCount}>count is {count}</button>
       </div>
     </>
   );

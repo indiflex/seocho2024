@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import Button from "./atoms/Button";
 import SampleAtoms from "./atoms/SampleAtoms";
 import ItemEdit, { MemoedItemEdit } from "./ItemEdit";
+import { useCount } from "../hooks/counter-context";
 // import ItemEdit, { MemoedItemEdit } from "./ItemEdit";
 
 export default function My({
@@ -17,6 +18,8 @@ export default function My({
 }) {
   const [isAdding, setIsAdding] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
+
+  const { count } = useCount();
 
   const cancelAdding = () => {
     setIsAdding(false);
@@ -90,12 +93,8 @@ export default function My({
       )}
 
       <h1>
-        Second: {time} - {prePrice}
+        Second: {time} - {count}
       </h1>
-      <Button
-        text="TotalPrice"
-        onClick={() => setTotalPriceToggleFlag(!totalPriceToggleFlag)}
-      />
 
       <div className="my-5 border text-center">
         <ul>
