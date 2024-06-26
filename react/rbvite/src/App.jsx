@@ -56,14 +56,18 @@ function App() {
   };
 
   const saveItem = (editingItem) => {
-    const { id } = editingItem;
+    const { id, name, price } = editingItem;
+    const foundItem = session.cart.find((item) => item.id === id);
+    foundItem.name = name;
+    foundItem.price = price;
+    setSession({ ...session });
 
-    setSession({
-      ...session,
-      cart: [
-        ...session.cart.map((item) => (item.id === id ? editingItem : item)),
-      ],
-    });
+    // setSession({
+    //   ...session,
+    //   cart: [
+    //     ...session.cart.map((item) => (item.id === id ? editingItem : item)),
+    //   ],
+    // });
   };
 
   return (
