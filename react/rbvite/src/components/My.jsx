@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import Login from "./Login";
+import { MemoedLogin } from "./Login";
 import Profile from "./Profile";
 import Button from "./atoms/Button";
 import SampleAtoms from "./atoms/SampleAtoms";
@@ -21,6 +21,7 @@ export default function My() {
     saveItem,
     addItem,
     removeItem,
+    login,
   } = useSession();
 
   const [isAdding, setIsAdding] = useState(false);
@@ -116,7 +117,7 @@ export default function My() {
         </div>
       )}
 
-      {loginUser ? <Profile /> : <Login />}
+      {loginUser ? <Profile /> : <MemoedLogin signIn={login} />}
 
       <h1>
         Second: {time} - {count}
