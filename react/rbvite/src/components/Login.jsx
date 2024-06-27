@@ -59,4 +59,6 @@ export default function Login({ signIn }) {
   );
 }
 
-export const MemoedLogin = memo(Login);
+// export const MemoedLogin = memo(Login);
+// export const MemoedLogin = memo(Login, () => true); // 편법!
+export const MemoedLogin = memo(Login, ({ login: a }, { login: b }) => a === b);

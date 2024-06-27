@@ -14,6 +14,7 @@ import { MemoedItemEdit } from "./ItemEdit";
 import { useCount } from "../hooks/counter-context";
 import Hello from "./Hello";
 import { useSession } from "../hooks/session-context";
+import clsx from "clsx";
 
 export default function My() {
   const {
@@ -109,6 +110,11 @@ export default function My() {
     [saveItem, prePrice, totalPriceToggleFlag],
   );
 
+  const [isUnder3, setIsUnder] = useState(false);
+  useEffect(() => {
+    setIsUnder(cart?.length < 3);
+  }, [cart]);
+
   return (
     <>
       {loginUser && (
@@ -123,8 +129,21 @@ export default function My() {
         Second: {time} - {count}
       </h1>
 
-      <div className="my-5 border text-center">
-        <ul>
+      {/* <div className="my-5 border-2 border-blue-500 border-red-500 text-center"> */}
+      <div
+        className={clsx("my-5 border-2 text-center", {
+          "border-blue-500": !isUnder3,
+          "border-red-500": isUnder3,
+        })}
+      >
+        {/* <ul className="border-b-2 border-red-500"> */}
+        {/* <ul className={clsx("border-b-2", "border-red-500")}> */}
+        <ul
+          className={clsx({
+            "border-b-2": true,
+            "border-red-500": isUnder3,
+          })}
+        >
           {cart?.length
             ? cart.map((item) => (
                 <li key={item.id} className="flex justify-between border-b">
