@@ -5,8 +5,7 @@ import {
   redirect,
   useParams,
   usePathname,
-  useRouter,
-  useSearchParams,
+  useRouter, // useSearchParams,
 } from 'next/navigation';
 
 const TIMES = ['morning', 'afternoon', 'evening'];
@@ -17,9 +16,9 @@ export default function HelloLayout({
   children: React.ReactNode;
 }>) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-  const pw = searchParams.get('pw');
+  // const searchParams = useSearchParams();
+  // const id = searchParams.get('id');
+  // const pw = searchParams.get('pw');
   // console.log('🚀  id pw:', id, pw, searchParams.toString());
 
   const params = useParams<{ id: string; pw: string }>();
@@ -37,17 +36,17 @@ export default function HelloLayout({
     router.push(target);
   };
 
-  const setSearchParam = (name: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    console.log('🚀  params:', params.toString());
-    params.set(name, value); // id 999
-    params.set('x', '888'); // id 999
+  // const setSearchParam = (name: string, value: string) => {
+  //   const params = new URLSearchParams(searchParams.toString());
+  //   console.log('🚀  params:', params.toString());
+  //   params.set(name, value); // id 999
+  //   params.set('x', '888'); // id 999
 
-    if (router && pathname) {
-      return router.push(`${pathname}?${params.toString()}`);
-    }
-    return params.toString();
-  };
+  //   if (router && pathname) {
+  //     return router.push(`${pathname}?${params.toString()}`);
+  //   }
+  //   return params.toString();
+  // };
 
   return (
     <>
@@ -74,7 +73,7 @@ export default function HelloLayout({
           Go Hello
         </button>
         <button
-          onClick={() => setSearchParam('id', '999')}
+          // onClick={() => setSearchParam('id', '999')}
           className='btn-danger'
         >
           Search Hello

@@ -1,4 +1,5 @@
-// http://localhost:3000/hello/morning
+'use client';
+
 export default function Morning() {
   return (
     <>

@@ -1,15 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  redirect,
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
-
-const TIMES = ['morning', 'afternoon', 'evening'];
+import { TIMES } from '@/utils/route-utils';
 
 export default function HiLayout({
   children,
