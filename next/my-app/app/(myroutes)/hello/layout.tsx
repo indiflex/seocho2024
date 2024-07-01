@@ -1,7 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { redirect, usePathname, useRouter } from 'next/navigation';
+import {
+  redirect,
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 
 const TIMES = ['morning', 'afternoon', 'evening'];
 
@@ -11,6 +17,14 @@ export default function HelloLayout({
   children: React.ReactNode;
 }>) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  const pw = searchParams.get('pw');
+  // console.log('🚀  id pw:', id, pw, searchParams.toString());
+
+  const params = useParams<{ id: string; pw: string }>();
+  console.log('🚀  params:', params);
+
   const pathname = usePathname(); // /hello/evening
   console.log('🚀  pathname:', pathname);
   if (pathname.endsWith('evening')) {
@@ -21,6 +35,18 @@ export default function HelloLayout({
   const go = (target: string) => {
     console.log('🚀 target:', target);
     router.push(target);
+  };
+
+  const setSearchParam = (name: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    console.log('🚀  params:', params.toString());
+    params.set(name, value); // id 999
+    params.set('x', '888'); // id 999
+
+    if (router && pathname) {
+      return router.push(`${pathname}?${params.toString()}`);
+    }
+    return params.toString();
   };
 
   return (
@@ -46,6 +72,12 @@ export default function HelloLayout({
         <Link href='/hello'>Hello</Link>
         <button onClick={() => go('/hello')} className='btn-primary'>
           Go Hello
+        </button>
+        <button
+          onClick={() => setSearchParam('id', '999')}
+          className='btn-danger'
+        >
+          Search Hello
         </button>
       </div>
 

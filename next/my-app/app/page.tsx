@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <main className='flex flex-col min-h-screen'>
       <Link href='/hello'>Hello</Link>
+      <Link href='/hi'>Hi~</Link>
       <Link href='/about'>About</Link>
       <Image
         src='/vercel.svg'
