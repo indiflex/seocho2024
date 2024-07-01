@@ -20,6 +20,7 @@ export async function generateStaticParams() {
 
 export default function Time({ params }: Params) {
   const { time } = params;
+  console.log('🚀  time:', time);
   if (!TIMES.includes(time)) {
     // return notFound();
     redirect('/hi');
