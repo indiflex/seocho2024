@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+a:hover {
+  color: skyblue;
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+}
+
+@layer components {
+  .btn {
+    @apply m-1 rounded-lg bg-slate-500 px-2 text-white hover:bg-slate-900;
+  }
+
+  .btn-danger {
+    @apply m-1 rounded-lg bg-red-500 px-2 text-white hover:bg-red-900;
+  }
+
+  .btn-primary {
+    @apply m-1 rounded-lg bg-blue-500 px-2 text-white hover:bg-blue-900;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

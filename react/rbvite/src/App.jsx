@@ -1,30 +1,25 @@
-import { useState } from 'react'
-import './App.css'
-import Hello from './components/Hello';
+import { FaMinus, FaPlus } from "react-icons/fa";
+import "./App.css";
+import My from "./components/My";
+import { useCount } from "./hooks/counter-context";
+import { SessionProvider } from "./hooks/session-context";
+import Button from "./components/atoms/Button";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [didLogin, setDidLogin] = useState(true);
-  const plusCount = () => setCount(count + 1);
+  const { count, plusCount, minusCount } = useCount();
 
-  const toggleLogin = () => {
-    setDidLogin(!didLogin);
-  }
   return (
     <>
-      <div>
-        {didLogin && <Hello name="Jade" age={33} plusCount={plusCount} />}
-      </div>
-      <button onClick={toggleLogin}>
-        Toggle {didLogin ? 'Logined' : 'NotLogined'}
-      </button>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <SessionProvider>
+        <My />
+      </SessionProvider>
+      <div className="border-2 border-red-300 p-3">
+        <h1>count is {count}</h1>
+        <Button text={<FaPlus />} onClick={() => plusCount()} />
+        <Button text={<FaMinus />} onClick={() => minusCount(2)} />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
