@@ -6,4 +6,10 @@ const meta = {
   tags: ["autodocs"],
 };
 
+export const DefaultInput = {
+  args: {
+    label: "DefaultInput",
+  },
+};
+
 export default meta;
