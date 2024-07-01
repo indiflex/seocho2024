@@ -1,10 +1,7 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Hello Next.js',
-  description: 'Hello Next.js',
-};
+import Link from 'next/link';
+import { redirect, usePathname, useRouter } from 'next/navigation';
 
 const TIMES = ['morning', 'afternoon', 'evening'];
 
@@ -13,6 +10,19 @@ export default function HelloLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
+  const pathname = usePathname(); // /hello/evening
+  console.log('🚀  pathname:', pathname);
+  if (pathname.endsWith('evening')) {
+    // router.push('/hello/morning'); // client에서 전환
+    redirect('/hello'); // server에서 전환
+  }
+
+  const go = (target: string) => {
+    console.log('🚀 target:', target);
+    router.push(target);
+  };
+
   return (
     <>
       <h1 className='text-xl'>Hello Layout</h1>
@@ -27,15 +37,16 @@ export default function HelloLayout({
           Evening
         </Link> */}
         {TIMES.map((time) => (
-          <>
+          <span key={time}>
             <Link href={`/hello/${time}`}>{time.toUpperCase()}</Link>
             <span className='mx-2 text-slate-500'>|</span>
-          </>
+          </span>
         ))}
 
-        <Link scroll={true} replace={true} href='/hello'>
-          Hello
-        </Link>
+        <Link href='/hello'>Hello</Link>
+        <button onClick={() => go('/hello')} className='btn-primary'>
+          Go Hello
+        </button>
       </div>
 
       <div className='my-5'>{children}</div>
