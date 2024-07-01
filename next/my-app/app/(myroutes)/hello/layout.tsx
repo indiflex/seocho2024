@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Hello Next.js',
 };
 
+const TIMES = ['morning', 'afternoon', 'evening'];
+
 export default function HelloLayout({
   children,
 }: Readonly<{
@@ -17,15 +19,25 @@ export default function HelloLayout({
       <div>
         <Link href='/'>Home</Link>
         <span className='mx-2 text-slate-500'>|</span>
-        <Link href='morning'>Morning</Link>
+        {/* <Link href='/hello/morning'>Morning</Link>
         <span className='mx-2 text-slate-500'>|</span>
-        <Link href='afternoon'>Afternoon</Link>
+        <Link href='/hello/afternoon'>Afternoon</Link>
         <span className='mx-2 text-slate-500'>|</span>
-        <Link href='evening'>Evening</Link>
-        <span className='mx-2 text-slate-500'>|</span>
+        <Link scroll={false} href='/hello/evening'>
+          Evening
+        </Link> */}
+        {TIMES.map((time) => (
+          <>
+            <Link href={`/hello/${time}`}>{time.toUpperCase()}</Link>
+            <span className='mx-2 text-slate-500'>|</span>
+          </>
+        ))}
 
-        <Link href='/hello'>Hello</Link>
+        <Link scroll={true} replace={true} href='/hello'>
+          Hello
+        </Link>
       </div>
+
       <div className='my-5'>{children}</div>
     </>
   );
