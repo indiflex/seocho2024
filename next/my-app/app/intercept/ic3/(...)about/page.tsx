@@ -1,3 +1,3 @@
 export default function AboutIntercept() {
-  return <>AboutIntercept</>;
+  return <>About Intercept</>;
 }

@@ -1,3 +1,3 @@
 export default function Ic1Intercept() {
-  return <>IC1 - InterceptRoute</>;
+  return <>IC1 - Intercept</>;
 }

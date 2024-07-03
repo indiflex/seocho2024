@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 export default function InterceptLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      {children}
+      <div className='border-2 p-7 mb-3'>{children}</div>
 
       <ul>
         <li className='flex gap-5'>
