@@ -23,8 +23,9 @@ export default function RootLayout({
           <Link href='/ssg'>SSG</Link>
           <Link href='/ssr'>SSR</Link>
           <Link href='/isr'>ISR</Link>
+          <Link href='/photos'>Photos</Link>
         </div>
-        <div className='container flex flex-col items-center justify-between p-24'>
+        <div className='container flex flex-col items-center justify-center pl-5 py-5'>
           <div>{children}</div>
         </div>
       </body>

@@ -11,6 +11,14 @@ export type Todo = {
   completed: boolean;
 };
 
+export type Photo = {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+};
+
 const URL = 'https://jsonplaceholder.typicode.com';
 // const UsersURL = `${URL}/users`;
 
@@ -28,3 +36,9 @@ export const getTodos = async (userId: number): Promise<Todo[]> => {
 };
 
 // export const getTodo = async (userId: number, todoId: number) => {};
+
+export async function getPhotos(albumId: number): Promise<Photo[]> {
+  const res = await fetch(`${URL}/albums/${albumId}/photos`);
+
+  return res.json();
+}
