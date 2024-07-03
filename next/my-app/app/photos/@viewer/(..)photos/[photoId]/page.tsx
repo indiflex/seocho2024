@@ -1,8 +1,9 @@
 import ImageViewer from '@/components/ImageViewer';
+import Modal from '@/components/Modal';
 import { notFound } from 'next/navigation';
 import { getPhotos } from '@/lib/placeholder';
 
-export default async function Photo({
+export default async function PhotoIntercept({
   params: { photoId },
 }: {
   params: { photoId: string };
@@ -16,5 +17,9 @@ export default async function Photo({
     return notFound;
   }
 
-  return <ImageViewer photo={photo} />;
+  return (
+    <Modal className='p-0'>
+      <ImageViewer photo={photo} isModal={true} />
+    </Modal>
+  );
 }

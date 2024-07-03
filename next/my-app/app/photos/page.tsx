@@ -8,7 +8,7 @@ export default async function Photos() {
     <>
       <h1 className='text-3xl'>Photos</h1>
       Image List: {photos.length}
-      <div className='grid lg:grid-cols-7 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 w-full'>
+      <div className='grid lg:grid-cols-7 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 place-items-center w-full'>
         {photos.map((photo) => (
           <Link key={photo.id} href={`/photos/${photo.id}`}>
             <Image

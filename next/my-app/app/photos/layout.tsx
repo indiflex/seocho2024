@@ -1,5 +1,16 @@
 import { ReactNode } from 'react';
 
-export default function PhotosLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+export default function PhotosLayout({
+  viewer,
+  children,
+}: {
+  viewer: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <>
+      {children}
+      {viewer}
+    </>
+  );
 }
