@@ -7,7 +7,6 @@ export default function Home() {
       <Link href='/hello'>Hello</Link>
       <Link href='/hi'>Hi~</Link>
       <Link href='/about'>About</Link>
-      <Link href='/csr'>CSR</Link>
       <Image
         src='/vercel.svg'
         alt='Vercel Logo'

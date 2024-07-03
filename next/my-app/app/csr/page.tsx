@@ -22,7 +22,14 @@ export default function CSR() {
     <>
       <h1>This is About Page!! {dtStr}</h1>
       <Link href='/'>GoHome</Link>
-      {users}
+      <hr className='w-24 mt-3' />
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            <Link href={`/ssg/${user.id}`}>{user.username}</Link>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

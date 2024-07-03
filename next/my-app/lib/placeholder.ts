@@ -14,13 +14,17 @@ export type Todo = {
 const URL = 'https://jsonplaceholder.typicode.com';
 // const UsersURL = `${URL}/users`;
 
-export const getUsers = async () => {
+export const getUsers = async (): Promise<User[]> => {
   const res = await fetch(`${URL}/users`);
   return res.json();
 };
 
-// export const getTodos = async (userId: number) => {
-//   fetch(`${URL}/users/${userId}`);
-// };
+export const getTodos = async (userId: number): Promise<Todo[]> => {
+  const res = await fetch(`${URL}/users/${userId}/todos`, {
+    // cache: 'no-store',
+    next: { revalidate: 10 },
+  });
+  return res.json();
+};
 
 // export const getTodo = async (userId: number, todoId: number) => {};
