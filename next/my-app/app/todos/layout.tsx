@@ -11,7 +11,7 @@ export default async function TodosLayout({
   return (
     <>
       <div className='flex justify-between w-screen gap-5'>
-        <div className='w-1/2 text-right'>
+        <div className='w-1/2 text-right mt-1'>
           <h1 className='text-2xl'>List</h1>
           <ul>
             {todos?.map(({ id, title }) => (
