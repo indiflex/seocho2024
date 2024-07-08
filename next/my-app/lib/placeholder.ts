@@ -35,7 +35,11 @@ export const getTodos = async (userId: number): Promise<Todo[]> => {
   return res.json();
 };
 
-// export const getTodo = async (userId: number, todoId: number) => {};
+export const getTodo = async (todoId: number): Promise<Todo> => {
+  const res = await fetch(`${URL}/todos/${todoId}`);
+  // console.log('🚀  res:', res);
+  return res.json();
+};
 
 export async function getPhotos(albumId: number): Promise<Photo[]> {
   const res = await fetch(`${URL}/albums/${albumId}/photos`);

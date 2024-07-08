@@ -35,6 +35,9 @@ export default function RootLayout({
           <Button variant='link'>
             <Link href='/photos'>Photos</Link>
           </Button>
+          <Button variant='link'>
+            <Link href='/todos'>Todos</Link>
+          </Button>
         </div>
         <div className='container mx-auto flex flex-col items-center justify-center pl-5 py-5'>
           <div className='mt-7'>{children}</div>
