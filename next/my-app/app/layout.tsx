@@ -1,4 +1,6 @@
+import { Button } from '@/components/ui/button';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
@@ -17,8 +19,28 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className={inter.className}>
-        <div className='container flex flex-col items-center justify-between p-24'>
-          {children}
+        <div className='flex fixed justify-around w-full bg-slate-100'>
+          <Button variant='link'>
+            <Link href='/csr'>CSR</Link>
+          </Button>
+          <Button variant='link'>
+            <Link href='/ssg'>SSG</Link>
+          </Button>
+          <Button variant='link'>
+            <Link href='/ssr'>SSR</Link>
+          </Button>
+          <Button variant='link'>
+            <Link href='/isr'>ISR</Link>
+          </Button>
+          <Button variant='link'>
+            <Link href='/photos'>Photos</Link>
+          </Button>
+          <Button variant='link'>
+            <Link href='/todos'>Todos</Link>
+          </Button>
+        </div>
+        <div className='container mx-auto flex flex-col items-center justify-center pl-5 py-5'>
+          <div className='mt-7'>{children}</div>
         </div>
       </body>
     </html>

@@ -1,5 +1,5 @@
 import { notFound, redirect } from 'next/navigation';
-import { TIMES } from '@/utils/route-utils';
+import { TIMES } from '@/lib/route-utils';
 
 type Params = {
   params: {
@@ -20,10 +20,10 @@ export async function generateStaticParams() {
 
 export default function Time({ params }: Params) {
   const { time } = params;
-  console.log('🚀  time:', time);
+  console.log('🚀  time:', time, !TIMES.includes(time));
   if (!TIMES.includes(time)) {
-    // return notFound();
     redirect('/hi');
+    return notFound();
   }
 
   return <h3 className='text-3xl'>Good {toUpperFirstChar(time)}!</h3>;
