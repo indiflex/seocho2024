@@ -1,10 +1,10 @@
-import { useEffect, useReducer, useState } from "react";
-import { useCount } from "../hooks/counter-context";
+import {useEffect, useReducer, useState} from "react";
+import {useCount} from "../hooks/counter-context";
 import Button from "./atoms/Button";
 
 export default function Hello(props) {
   // console.log("Heeeeeeeeelo!!");
-  const { plusCount } = useCount();
+  const {plusCount} = useCount();
 
   const [isActive, setIsActive] = useState(false);
   const [isValid, toggleValid] = useReducer((pre) => !pre, false);
