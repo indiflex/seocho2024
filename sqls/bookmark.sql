@@ -33,7 +33,16 @@ desc Book;
 
 create table Mark (
   id int unsigned not null auto_increment primary key,
+  book int unsigned not null comment '내가 담겨있는 북',
+  url varchar(512) not null comment 'URL 주소',
+  title varchar(512) not null comment '페이지 제목',
+  descript varchar(1024) null comment '설명(og:description)',
+  image varchar(512) null comment '이미지(og:image)',
+  isdel boolean not null default 0 comment '삭제 여부',
+  foreign key fk_book(book) references Book(id) on delete cascade
 );
+
+desc Mark;
 
 insert into User (nickname, email)
           values ('hong', 'hong@gmail.com');
