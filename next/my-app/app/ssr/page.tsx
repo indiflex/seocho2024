@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function SSR() {
   const todo = await getTodo(300);
-  if (!todo.id) throw new Error('xxxxxxxx');
+  // if (!todo.id) throw new Error('xxxxxxxx');
   return (
     <>
       <h1 className='text-2xl'>SSR</h1>

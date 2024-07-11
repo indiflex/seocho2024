@@ -6,7 +6,7 @@
     "dev": "next dev --port 3000",
     "dev:turbo": "next dev --turbo",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 4000",
     "lint": "next lint",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore ."
