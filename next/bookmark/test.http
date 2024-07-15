@@ -1,0 +1,13 @@
+### get books
+GET http://localhost:3000/api/books?userId=1
+
+
+###
+
+POST http://localhost:3000/api/books 
+
+{
+  "title": "Test Book",
+  "owner": 4,
+  "clickdel": 0
+}
