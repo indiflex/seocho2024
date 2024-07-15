@@ -56,9 +56,22 @@ insert into Mark(book, url, title)
  (6, 'https://youtube.com', 'Youtube');
 
 -- 읽기(join)
-select *
-  from Book b inner join Mark m on b.id = m.book;
+select * from Book b inner join Mark m on b.id = m.book;
   
 select b.id bookid, u.nickname 'owner', m.book, m.url, m.title
   from Book b inner join Mark m on b.id = m.book
               inner join User u on b.owner = u.id;
+              
+select * from Mark;
+-- update Mark set title='유튜브' where title='Youtube'; -- BAD
+update Mark set title='유튜브' where id = 3; -- GOOD
+
+select b.title, m.title, concat(b.title, '-', m.title)
+  from Book b inner join Mark m on b.id = m.book;
+
+-- join & update
+update Book b inner join Mark m on b.id = m.book
+   set m.title= concat(b.title, '-', m.title)
+ where m.id > 0;
+
+select * from Book b inner join Mark m on b.id = m.book;
