@@ -9,7 +9,30 @@ GET {{api}}/books?userId=4
 POST {{api}}/books 
 
 {
-  "title": "Test Book",
+  "title": "Test Book11",
   "owner": 4,
   "clickdel": 0
 }
+
+### get a book
+GET {{api}}/books/5
+
+### update book
+PATCH {{api}}/books/7
+
+{
+  "title": "TTT",
+  "clickdel": 1
+}
+
+###
+
+PUT {{api}}/books/6
+
+{
+  "title": "SSS",
+  "clickdel": 1
+}
+
+### delete book
+DELETE {{api}}/books/7

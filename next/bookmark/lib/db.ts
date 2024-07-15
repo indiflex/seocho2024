@@ -24,10 +24,13 @@ export const query = async (sql: string, params: unknown[]) => {
   const conn = await pool.getConnection();
   try {
     const [rows, fields] = await conn.query(sql, params);
+    console.log('🚀  result:', rows);
+    // return result;
     return [rows, fields];
   } catch (error) {
     console.table({ error });
     throw error;
+    // throw new Error(JSON.stringify(error));
   } finally {
     conn.release();
   }
