@@ -1,10 +1,12 @@
+@api=http://localhost:3000/api
+
 ### get books
-GET http://localhost:3000/api/books?userId=1
+GET {{api}}/books?userId=4
 
 
 ###
-
-POST http://localhost:3000/api/books 
+# insert book testing
+POST {{api}}/books 
 
 {
   "title": "Test Book",
