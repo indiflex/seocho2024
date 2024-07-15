@@ -135,7 +135,16 @@ select * from v_user_book;
 
 SET GLOBAL log_bin_trust_function_creators = ON;
 
-select b.*, user_name(b.owner) ownername from Book b;
+select b.*, f_username(b.owner) ownername from Book b;
+select f_username(4);
+
+select createdate, f_dt(createdate) from User;
+
+call sp_books_by_user(1);
 
 select nickname from User where id = 4;
 desc User;
+
+SHOW FUNCTION STATUS WHERE Db = 'seochodb';
+
+show processlist;
