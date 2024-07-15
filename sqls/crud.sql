@@ -44,3 +44,21 @@ select b.id 'bookID', b.title, u.nickname as 'owner', b.clickdel
   
 select u.id as UserID, u.nickname, b.title, b.id as BookID
   from User u left outer join Book b on u.id = b.owner;
+  
+-- ex) hong의 Study(1)와 king의 Enter(6) 북에 마크를 하나씩 추가해 보세요.
+select * from Book;
+select * from Mark;
+desc Mark;
+
+-- 추가하기(1, 6)
+insert into Mark(book, url, title)
+ value (1, 'https://naver.com', '네이버'), (6, 'https://daum.net', '다음'),
+ (6, 'https://youtube.com', 'Youtube');
+
+-- 읽기(join)
+select *
+  from Book b inner join Mark m on b.id = m.book;
+  
+select b.id bookid, u.nickname 'owner', m.book, m.url, m.title
+  from Book b inner join Mark m on b.id = m.book
+              inner join User u on b.owner = u.id;
