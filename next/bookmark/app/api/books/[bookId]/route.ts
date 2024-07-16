@@ -1,4 +1,6 @@
-import { query } from '@/lib/db';
+import { execute, query } from '@/lib/db';
+import { Book } from '@/types';
+import { RowDataPacket } from 'mysql2';
 import { NextRequest, NextResponse } from 'next/server';
 
 type Params = {
@@ -7,8 +9,11 @@ type Params = {
 
 export async function GET(req: NextRequest, { params: { bookId } }: Params) {
   try {
-    const [book] = await query('select * from Book where id = ?', [bookId]);
-    console.log('🚀  book:', book);
+    const [book] = await query<Book & RowDataPacket>(
+      'select * from Book where id = ?',
+      [bookId]
+    );
+    // console.log('🚀  book:', book.title);
     return NextResponse.json({ book });
   } catch (error) {
     return handleError(error);
@@ -18,28 +23,31 @@ export async function GET(req: NextRequest, { params: { bookId } }: Params) {
 // api/books/[bookId]
 // api/books/555
 export async function PATCH(req: NextRequest, { params: { bookId } }: Params) {
-  return await execute(req, bookId);
+  return await update(req, bookId);
 }
 export async function PUT(req: NextRequest, { params: { bookId } }: Params) {
-  return await execute(req, bookId);
+  return await update(req, bookId);
 }
 
 export async function DELETE(req: NextRequest, { params: { bookId } }: Params) {
   try {
-    await query('delete from Book where id = ?', [bookId]);
+    const rows = await execute('delete from Book where id = ?', [bookId]);
 
-    return NextResponse.json({ message: 'OK' }, { status: 200 });
+    const message = rows.affectedRows > 0 ? 'OK' : 'Fail to delete';
+    const status = rows.affectedRows > 0 ? 200 : 404;
+
+    return NextResponse.json({ message }, { status });
   } catch (error) {
     console.log('************', error);
     return handleError(error);
   }
 }
 
-async function execute(req: NextRequest, bookId: string) {
+async function update(req: NextRequest, bookId: string) {
   const { title, clickdel } = await req.json();
 
   try {
-    await query('update Book set title = ?, clickdel = ? where id = ?', [
+    await execute('update Book set title = ?, clickdel = ? where id = ?', [
       title,
       clickdel,
       bookId,
