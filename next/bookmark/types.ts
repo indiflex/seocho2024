@@ -1,5 +1,6 @@
 import { RowDataPacket } from 'mysql2';
 
+// client
 export type User = {
   id: number;
   nickname: string;
@@ -7,6 +8,7 @@ export type User = {
   passwd: string;
 };
 
+// server
 export type UserRowData = User & RowDataPacket;
 
 export type Book = {

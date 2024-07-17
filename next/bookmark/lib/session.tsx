@@ -1,43 +1,58 @@
 'use client';
 
-import { useContext, createContext, useCallback, useReducer } from 'react';
+import { Book, User } from '@/types';
+import {
+  useContext,
+  createContext,
+  useCallback,
+  useReducer,
+  ReactNode,
+} from 'react';
+
+type Session = {
+  loginUser: User;
+  books: Book[];
+};
+
+type Action = {
+  type: 'login' | 'logout' | 'addBook' | 'saveBook' | 'removeBook';
+  payload: Book & User;
+};
+
+type Dispatcher = {};
 
 const SessionContext = createContext({});
 
-const reducer = (session, action) => {
+const reducer = (session: Session, action: Action) => {
   const {
     type,
-    payload: { id, name, price },
+    payload: { id, title, clickdel, nickname, email },
   } = action;
-  console.log('🚀  payload:', id, name, price);
 
   switch (type) {
     case 'logout':
       return { ...session, loginUser: null };
 
     case 'login':
-      return { ...session, loginUser: { id: 1, age: 33, name } };
+      return { ...session, loginUser: { id: 1, nickname, email } };
 
-    case 'removeItem':
+    case 'removeBook':
       return {
         ...session,
-        cart: [...session.cart.filter((item) => item.id !== id)],
+        cart: [...session.books.filter((book) => book.id !== id)],
       };
 
-    case 'addItem':
-      console.table({ id, name, price });
-      // session.cart.push({ id, name, price }); // 2번 push!!
-      // return { ...session };
-
+    case 'addBook':
+      console.table({ id, title, clickdel });
       // 완전히 추가되기 전의 session.cart가 spread되므로 1번만 추가된 것 처럼 보임!
-      return { ...session, cart: [...session.cart, { id, name, price }] };
+      return { ...session, books: [...session.books, { id, title, clickdel }] };
 
-    case 'saveItem':
+    case 'saveBook':
       return {
         ...session,
-        cart: session.cart.map((_item) => {
-          if (_item.id !== id) return _item;
-          return { id, name, price };
+        books: session.books.map((book) => {
+          if (book.id !== id) return book;
+          return { id, title, clickdel };
         }),
       };
 
@@ -46,11 +61,14 @@ const reducer = (session, action) => {
   }
 };
 
-const SessionProvider = ({ children }) => {
-  const [session, dispatch] = useReducer(reducer, SampleSession);
+const SessionProvider = ({ children }: { children: ReactNode }) => {
+  const [session, dispatch] = useReducer<Session>(reducer, {
+    loginUser: null,
+    bookds: [],
+  });
 
   const logout = useCallback(
-    () => dispatch({ type: 'logout', payload: {} }),
+    () => dispatch({ type: 'logout', payload: { ...session } }),
     []
   );
 
