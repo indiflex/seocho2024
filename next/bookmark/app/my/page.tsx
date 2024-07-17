@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import LabelInput from '@/components/LabelInput';
+import Logout from '@/components/Logout';
 import { auth } from '@/lib/auth';
-import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
 export default async function MyPage() {
@@ -27,6 +27,7 @@ export default async function MyPage() {
         <div className='flex flex-col'>
           <LabelInput label='Nickname' value={name || ''} />
           <LabelInput label='Email' value={email || ''} />
+          <Logout />
         </div>
       </div>
       <hr className='mt-10' />

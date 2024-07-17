@@ -20,7 +20,7 @@ export default function LabelInput({ label, value, readonly = true }: Props) {
         type='text'
         placeholder={value}
         readOnly={readonly}
-        className='border-0 focus:border-0 focus-visible:ring-0'
+        className='border-0 focus:border-0 focus-visible:ring-0 text-right'
       />
     </div>
   );
