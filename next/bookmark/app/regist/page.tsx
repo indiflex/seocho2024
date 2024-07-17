@@ -6,11 +6,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AlertCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 
 export default function RegistPage() {
   const router = useRouter();
   const [msg, setMsg] = useState('');
+  const nicknameRef = useRef<HTMLInputElement>(null);
 
   const register = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ export default function RegistPage() {
     const passwd2 = formData.get('passwd2');
 
     if (!nickname) {
+      nicknameRef.current?.focus();
       return setMsg('Input the nickname, plz..');
     }
 
@@ -50,7 +52,12 @@ export default function RegistPage() {
       <form onSubmit={register} className=''>
         <div className='text-left m-2'>
           <Label htmlFor='nickname'>Nickname</Label>
-          <Input id='nickname' name='nickname' placeholder='nickname...' />
+          <Input
+            ref={nicknameRef}
+            id='nickname'
+            name='nickname'
+            placeholder='nickname...'
+          />
         </div>
         <div className='text-left m-2'>
           <Label htmlFor='email'>Email</Label>

@@ -19,5 +19,5 @@ export const {
     //   clientSecret: process.env.NAVER_CLIENT_SECRET as string,
     // }),
   ],
-  secret: process.env.AUTH_SECRET as string,
+  // secret: process.env.AUTH_SECRET as string,
 });

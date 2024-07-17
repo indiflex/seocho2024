@@ -35,10 +35,10 @@ export default async function MyPage() {
           <Button variant='ghost'>SignOut</Button>
         </form>
       </div>
-      <hr className='mt-10' />
+      {/* <hr className='mt-10' />
       <pre className='text-sm text-slate-400'>
         {JSON.stringify(session, null, '  ')}
-      </pre>
+      </pre> */}
     </div>
   );
 }
