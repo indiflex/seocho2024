@@ -16,6 +16,8 @@ export type Book = {
   clickdel: boolean;
 };
 
+export type BookRowData = Book & RowDataPacket;
+
 export type Mark = {
   id: number;
   book: number;
@@ -25,3 +27,5 @@ export type Mark = {
   image: string;
   isdel: boolean;
 };
+
+export type MarkRowData = Mark & RowDataPacket;

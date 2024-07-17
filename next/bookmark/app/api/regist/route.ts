@@ -1,7 +1,21 @@
+import { auth } from '@/lib/auth';
 import { execute, query } from '@/lib/db';
 import { UserRowData } from '@/types';
 import { hash } from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
+
+export async function GET(req: NextRequest) {
+  const session = await auth();
+  console.log('🚀  session:', session);
+  const { searchParams } = req.nextUrl;
+  const email = searchParams.get('email');
+  const [user] = await query<UserRowData>(
+    'select * from User where email = ?',
+    [email]
+  );
+  const { id, nickname } = user;
+  return NextResponse.json({ id, nickname });
+}
 
 export async function POST(req: NextRequest) {
   const { nickname, email, passwd } = await req.json();

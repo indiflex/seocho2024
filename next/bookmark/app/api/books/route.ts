@@ -1,3 +1,4 @@
+import { auth } from '@/lib/auth';
 import { execute, query } from '@/lib/db';
 import { Book } from '@/types';
 import { RowDataPacket } from 'mysql2';
@@ -20,6 +21,8 @@ export async function POST(req: NextRequest) {
 
 // book list for login user
 export async function GET(req: NextRequest) {
+  const session = await auth();
+  console.log('🚀 books - session:', session);
   const { searchParams } = req.nextUrl;
   const userId = searchParams.get('userId');
   // console.log('🚀  userId:', userId);

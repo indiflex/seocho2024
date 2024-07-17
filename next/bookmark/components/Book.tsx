@@ -9,7 +9,6 @@ type SaveBook = (book: BookType) => Promise<void>;
 type Props = {
   book: BookType;
   saveBook: SaveBook;
-  f: (i: number) => string;
 };
 
 export default function Book({ book, saveBook }: Props) {

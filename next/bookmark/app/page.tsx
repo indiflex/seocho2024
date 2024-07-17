@@ -1,26 +1,40 @@
 import Book from '@/components/Book';
 import { Button } from '@/components/ui/button';
 import { auth } from '@/lib/auth';
+import { execute, query } from '@/lib/db';
 import { Book as BookType } from '@/types';
-import { redirect } from 'next/navigation';
+import { RowDataPacket } from 'mysql2';
+
+const CreateSql = 'insert into Book(title, owner, clickdel) values(?,?,?)';
 
 export default async function Home() {
+  // const res = await fetch(`/api/books`);
+  // const books: BookType[] = await res.json();
+  // const books: BookType[] = [];
   const session = await auth();
-  if (!session || !session.user) redirect('/api/auth/signin');
 
-  const res = await fetch(`/api/books?userId=${session.user.id}`);
-  const books: BookType[] = await res.json();
-
-  console.log('🚀  res:', res);
+  const books = await query<BookType & RowDataPacket>(
+    'select b.* from Book b inner join User u on b.owner = u.id where u.email = ?',
+    [session?.user?.email]
+  );
+  console.log('🚀  books:', books);
 
   const saveBook = async (book: BookType) => {
-    const res = await fetch('/api/books', {
-      method: book.id ? 'PATCH' : 'POST',
-      body: JSON.stringify({
-        ...book,
-      }),
-    });
-    console.log('🚀  res:', res);
+    'use server';
+    const rsh = await execute(CreateSql, [
+      book.title,
+      book.owner,
+      book.clickdel,
+    ]);
+    console.log('🚀  rsh:', rsh);
+    console.log('🚀  book:', book);
+  };
+
+  const add = async () => {
+    'use server';
+    console.log('add');
+    // books.push({ title: '', owner: 13, clickdel: false });
+    saveBook({ id: 0, title: '', owner: 13, clickdel: false });
   };
 
   return (
@@ -28,7 +42,9 @@ export default async function Home() {
       {books?.map((book) => (
         <Book key={book.id} book={book} saveBook={saveBook} />
       ))}
-      <Button>+ Add Book</Button>
+      <form action={add}>
+        <Button>+ Add Book</Button>
+      </form>
     </div>
   );
 }
