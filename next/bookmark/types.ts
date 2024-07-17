@@ -1,9 +1,13 @@
+import { RowDataPacket } from 'mysql2';
+
 export type User = {
   id: number;
   nickname: string;
   email: string;
   passwd: string;
 };
+
+export type UserRowData = User & RowDataPacket;
 
 export type Book = {
   id: number;

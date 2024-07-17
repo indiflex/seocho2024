@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import LabelInput from '@/components/LabelInput';
-import Logout from '@/components/Logout';
-import { auth } from '@/lib/auth';
+import { Button } from '@/components/ui/button';
+import { auth, signOut } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 export default async function MyPage() {
@@ -12,6 +12,11 @@ export default async function MyPage() {
   const {
     user: { name, email, image },
   } = session;
+
+  const logout = async () => {
+    'use server';
+    await signOut();
+  };
 
   return (
     <div className='flex flex-col mx-auto max-w-md'>
@@ -24,11 +29,11 @@ export default async function MyPage() {
           height={100}
           className='hover:opacity-50'
         />
-        <div className='flex flex-col'>
+        <form action={logout} className='flex flex-col'>
           <LabelInput label='Nickname' value={name || ''} />
           <LabelInput label='Email' value={email || ''} />
-          <Logout />
-        </div>
+          <Button variant='ghost'>SignOut</Button>
+        </form>
       </div>
       <hr className='mt-10' />
       <pre className='text-sm text-slate-400'>
