@@ -26,7 +26,7 @@ export const query = async <T extends RowDataPacket>(
   const conn = await pool.getConnection();
   try {
     const [rows] = await conn.query<T[]>(sql, params);
-    console.log('🚀  result:', rows);
+    // console.log('🚀  result:', rows);
     // return result;
     return rows;
   } catch (error) {

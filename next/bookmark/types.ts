@@ -5,8 +5,10 @@ export type User = {
   id: number;
   nickname: string;
   email: string;
-  passwd: string;
+  passwd?: string;
 };
+
+export const DefaultUser: User = { id: 0, nickname: '', email: '' };
 
 // server
 export type UserRowData = User & RowDataPacket;
