@@ -148,3 +148,10 @@ desc User;
 SHOW FUNCTION STATUS WHERE Db = 'seochodb';
 
 show processlist;
+delete from User where nickname = '시니어코딩indiflex';
+delete from User where nickname = 'aa';
+
+select * from User;
+select * from Book;
+select * from Mark;
+desc Mark;

@@ -1,9 +1,9 @@
 'use client';
-import { FormEvent, useEffect, useReducer, useRef } from 'react';
+import { FormEvent, useEffect, useReducer, useRef, useState } from 'react';
 import Mark from './Mark';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Book as BookType } from '@/types';
+import { Book as BookType, Mark as MarkType } from '@/types';
 
 type SaveBook = (book: BookType) => Promise<void>;
 type Props = {
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export default function Book({ book, saveBook }: Props) {
+  const [marks, setMarks] = useState<MarkType[]>([]);
   const [isEditing, toggleEditing] = useReducer((pre) => !pre, false);
   const titleRef = useRef<HTMLInputElement>(null);
 
@@ -27,6 +28,16 @@ export default function Book({ book, saveBook }: Props) {
       titleRef.current.focus();
     }
   }, [isEditing]);
+
+  useEffect(() => {
+    const getMarks = async (bookId: number) => {
+      const res = await fetch(`/api/books/${bookId}/marks`);
+      const data = await res.json();
+      setMarks(data.marks);
+    };
+
+    if (book && book.id) getMarks(book.id);
+  }, [book]);
 
   return (
     <div className='w-64 bg-gray-200 mr-3 rounded p-1'>
@@ -48,13 +59,11 @@ export default function Book({ book, saveBook }: Props) {
           variant='ghost'
           className='w-full text-xl font-semibold mb-1'
         >
-          <div className='w-full truncate'>
-            Title Title Title Title Title Title Title Title Title
-          </div>
+          <div className='w-full truncate'>{book.title}</div>
         </Button>
       )}
 
-      <Mark />
+      <div>{marks?.map((mark) => <Mark key={mark.id} mark={mark} />)}</div>
     </div>
   );
 }

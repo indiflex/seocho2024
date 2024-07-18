@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { BookMarkedIcon } from 'lucide-react';
 import { auth } from '@/lib/auth';
 import Link from 'next/link';

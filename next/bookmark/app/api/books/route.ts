@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   const session = await auth();
   console.log('🚀 books - session:', session);
   const { searchParams } = req.nextUrl;
-  const userId = searchParams.get('userId');
+  const userId = searchParams.get('userId') || session?.user?.id;
   // console.log('🚀  userId:', userId);
   // const conn = await mysql.createConnection(config);
   // const conn = await pool.getConnection();

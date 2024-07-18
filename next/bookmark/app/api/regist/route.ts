@@ -1,6 +1,6 @@
 import { auth } from '@/lib/auth';
 import { execute, query } from '@/lib/db';
-import { getUserByEmail } from '@/lib/serveraction';
+import { createBook, createMark, getUserByEmail } from '@/lib/serveraction';
 import { UserRowData } from '@/types';
 import { hash } from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
@@ -34,8 +34,21 @@ export async function POST(req: NextRequest) {
       [nickname, email, hashedPasswd]
     );
 
+    const { insertId: newer } = rsh;
+
+    const book = await createBook(`${nickname} BookMark`, newer);
+
+    await createMark({
+      book,
+      url: 'https://seocho.topician.com',
+      title: 'BookMark',
+      descript: '나만의 북마크',
+      image:
+        'https://yt3.googleusercontent.com/OpFndZzuAyxzq3gKcVIUVQIl-V1LrwOKeJY18sCpQIzp6ddQXmWFzSEjvES9CN0bVOhx2-ubOg=s160-c-k-c0x00ffffff-no-rj',
+    });
+
     const [user] = await query<UserRowData>('select * from User where id = ?', [
-      rsh.insertId,
+      newer,
     ]);
 
     return NextResponse.json({ user });

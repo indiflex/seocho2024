@@ -53,7 +53,10 @@ export const {
     },
     session: async ({ session }) => {
       console.log('🚀 auth - callbacks - session:', session);
-      // if (session.user) session.user.id = '0';
+      if (!session.user.id) {
+        const user = await getUser(session.user.email);
+        if (session.user) session.user.id = user.id;
+      }
       return session;
     },
     async redirect({ url, baseUrl }) {
