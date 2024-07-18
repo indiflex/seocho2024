@@ -23,7 +23,7 @@ export type Book = {
 export type BookRowData = Book & RowDataPacket;
 
 export type Mark = {
-  id?: number;
+  id: number;
   book: number;
   url: string;
   title: string;

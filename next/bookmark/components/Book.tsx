@@ -22,6 +22,32 @@ export default function Book({ book, saveBook }: Props) {
     saveBook(book);
   };
 
+  const saveMark = async (mark: MarkType) => {
+    let method = 'PATCH';
+    if (mark.id) {
+      setMarks([
+        ...marks.map((_mark) => {
+          if (_mark.id === mark.id) return mark;
+          return _mark;
+        }),
+      ]);
+    } else {
+      method = 'POST';
+      setMarks([...marks, mark]);
+    }
+
+    const res = await fetch(
+      `/api/books/${book.id}/marks/${mark.id ? mark.id : ''}`,
+      {
+        method,
+      }
+    );
+  };
+
+  const removeMark = (markId: number) => {
+    setMarks([...marks.filter((_mark) => _mark.id !== markId)]);
+  };
+
   useEffect(() => {
     if (isEditing && titleRef.current) {
       titleRef.current.value = '';
@@ -63,7 +89,20 @@ export default function Book({ book, saveBook }: Props) {
         </Button>
       )}
 
-      <div>{marks?.map((mark) => <Mark key={mark.id} mark={mark} />)}</div>
+      <div>
+        {marks?.map((mark) => (
+          <Mark
+            key={mark.id}
+            mark={mark}
+            saveMark={saveMark}
+            removeMark={removeMark}
+          />
+        ))}
+
+        {!marks?.length && (
+          <div className='text-center'>There is no marks.</div>
+        )}
+      </div>
     </div>
   );
 }
