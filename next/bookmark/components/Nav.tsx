@@ -37,7 +37,7 @@ export default async function Nav() {
       </Link>
       <div className='flex'>
         <Link
-          href='https://github.com/indiflex/seocho2024/tree/master/next'
+          href='https://github.com/indiflex/seocho2024/tree/master/next/bookmark'
           target='_blank'
           className='mt-3 mx-5 hover:text-blue-500'
         >
