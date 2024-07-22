@@ -23,29 +23,37 @@ export default function Book({ book, saveBook }: Props) {
   };
 
   const saveMark = async (mark: MarkType) => {
-    let method = 'PATCH';
-    if (mark.id) {
-      setMarks([
-        ...marks.map((_mark) => {
-          if (_mark.id === mark.id) return mark;
-          return _mark;
-        }),
-      ]);
-    } else {
-      method = 'POST';
-      setMarks([...marks, mark]);
-    }
-
     const res = await fetch(
       `/api/books/${book.id}/marks/${mark.id ? mark.id : ''}`,
       {
-        method,
+        method: mark.id ? 'PATCH' : 'POST',
+        body: JSON.stringify({ ...mark }),
       }
     );
+    const data = await res.json();
+    console.log('🚀  data:', data);
+
+    setMarks([
+      ...marks.map((_mark) => {
+        if (_mark.id === mark.id) return data.mark;
+        return _mark;
+      }),
+    ]);
   };
 
-  const removeMark = (markId: number) => {
-    setMarks([...marks.filter((_mark) => _mark.id !== markId)]);
+  const removeMark = async (markId: number) => {
+    // if (confirm('삭'))
+    const res = await fetch(`/api/books/${book.id}/marks/${markId}`, {
+      method: 'DELETE',
+    });
+    const data = await res.json();
+    console.log('🚀  data:', data);
+    if (res.ok) setMarks([...marks.filter((_mark) => _mark.id !== markId)]);
+  };
+
+  const addMark = () => {
+    const newer = { id: 0, book: book.id, url: '', title: '' };
+    setMarks([newer, ...marks]);
   };
 
   useEffect(() => {
@@ -102,6 +110,10 @@ export default function Book({ book, saveBook }: Props) {
         {!marks?.length && (
           <div className='text-center'>There is no marks.</div>
         )}
+
+        <Button onClick={addMark} className='float-end'>
+          + Add Mark
+        </Button>
       </div>
     </div>
   );

@@ -37,6 +37,13 @@ export const createMark = async ({
   return rsh.insertId;
 };
 
+export const getMark = async (markId: number) => {
+  const [mark] = await query<MarkRowData>('select * from Mark where id = ?', [
+    markId,
+  ]);
+  return mark;
+};
+
 export const getUserByEmail = async (email: string | null) => {
   if (!email) return null;
   const [user] = await query<UserRowData>(

@@ -1,4 +1,4 @@
-import { createMark, getMarks } from '@/lib/serveraction';
+import { createMark, getMark, getMarks } from '@/lib/serveraction';
 import { NextRequest, NextResponse } from 'next/server';
 
 type Params = {
@@ -6,9 +6,9 @@ type Params = {
 };
 
 export async function POST(req: NextRequest) {
-  // Todo og-srap!!
-  // const {} = await req.json();
-  // const rsh = await createMark();
+  const insertId = await createMark(await req.json());
+  const mark = await getMark(insertId);
+  return NextResponse.json({ mark });
 }
 
 export async function GET(req: NextRequest, { params: { bookId } }: Params) {

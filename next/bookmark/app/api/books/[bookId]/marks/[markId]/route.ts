@@ -1,37 +1,33 @@
 import { execute, query } from '@/lib/db';
-import { Book } from '@/types';
+import { getMark } from '@/lib/serveraction';
+import { Mark, MarkRowData } from '@/types';
 import { RowDataPacket } from 'mysql2';
 import { NextRequest, NextResponse } from 'next/server';
 
 type Params = {
-  params: { bookId: string };
+  params: { markId: string };
 };
 
-export async function GET(req: NextRequest, { params: { bookId } }: Params) {
+export async function GET(req: NextRequest, { params: { markId } }: Params) {
   try {
-    const [book] = await query<Book & RowDataPacket>(
-      'select * from Book where id = ?',
-      [bookId]
-    );
-    // console.log('🚀  book:', book.title);
-    return NextResponse.json({ book });
+    const mark = await getMark(+markId);
+    // console.log('🚀  mark:', mark.title);
+    return NextResponse.json({ mark });
   } catch (error) {
     return handleError(error);
   }
 }
 
-// api/books/[bookId]
-// api/books/555
-export async function PATCH(req: NextRequest, { params: { bookId } }: Params) {
-  return await update(req, bookId);
+export async function PATCH(req: NextRequest, { params: { markId } }: Params) {
+  return await update(req, markId);
 }
-export async function PUT(req: NextRequest, { params: { bookId } }: Params) {
-  return await update(req, bookId);
+export async function PUT(req: NextRequest, { params: { markId } }: Params) {
+  return await update(req, markId);
 }
 
-export async function DELETE(req: NextRequest, { params: { bookId } }: Params) {
+export async function DELETE(req: NextRequest, { params: { markId } }: Params) {
   try {
-    const rows = await execute('delete from Book where id = ?', [bookId]);
+    const rows = await execute('delete from Mark where id = ?', [markId]);
 
     const message = rows.affectedRows > 0 ? 'OK' : 'Fail to delete';
     const status = rows.affectedRows > 0 ? 200 : 404;
@@ -43,20 +39,19 @@ export async function DELETE(req: NextRequest, { params: { bookId } }: Params) {
   }
 }
 
-async function update(req: NextRequest, bookId: string) {
-  const { title, clickdel } = await req.json();
+async function update(req: NextRequest, markId: string) {
+  const { url, title, descript } = await req.json();
 
   try {
-    await execute('update Book set title = ?, clickdel = ? where id = ?', [
-      title,
-      clickdel,
-      bookId,
-    ]);
+    await execute(
+      'update Mark set url = ?, title = ?, descript = ? where id = ?',
+      [url, title, descript, markId]
+    );
 
-    const [book] = await query('select * from Book where id = ?', [bookId]);
+    const [mark] = await query('select * from Mark where id = ?', [markId]);
 
     // console.log('rrrrrrr>>>', rows);
-    return NextResponse.json({ book });
+    return NextResponse.json({ mark });
   } catch (error) {
     return handleError(error);
   }
