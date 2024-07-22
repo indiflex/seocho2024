@@ -5,7 +5,9 @@ import { RowDataPacket } from 'mysql2';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { title, owner, clickdel } = await req.json();
+  const { title, clickdel } = await req.json();
+  const session = await auth();
+  const owner = session?.user?.id;
   const rows = await execute(
     'insert into Book(title, owner, clickdel) values(?,?,?)',
     [title, owner, clickdel]

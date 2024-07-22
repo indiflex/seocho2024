@@ -60,7 +60,7 @@ export default function Mark({ mark, saveMark, removeMark }: Props) {
     setScraping(true);
     try {
       let url = urlRef.current.value;
-      console.log('🚀  url:', url);
+      // console.log('🚀  url:', url);
       if (!url.startsWith('http')) url = 'https://' + url;
       const res = await fetch(`/api/ogscrap?url=${url}`);
       const { ogTitle, ogDescription, ogImage } = await res.json();
@@ -70,7 +70,7 @@ export default function Mark({ mark, saveMark, removeMark }: Props) {
 
       titleRef.current.value = ogTitle;
       descriptRef.current.value = ogDescription;
-      imageRef.current.value = ogImage[0]?.url;
+      if (ogImage?.length) imageRef.current.value = ogImage[0]?.url;
     } catch (error) {
       console.table(error);
       if (error instanceof Error) alert(error.message);
@@ -94,15 +94,15 @@ export default function Mark({ mark, saveMark, removeMark }: Props) {
   return (
     <div className='border-2 border-white p-1 mb-2'>
       {!isEditing ? (
-        <a href={mark.url} target='_blank' className='flex p-1 mb-2'>
-          <div className='w-20x text-center p-1 mr-2'>
+        <a href={mark.url} target='_blank' className='flex p-1 mb-2 w-60'>
+          <div className='text-center p-1 mr-2'>
             <img
-              src={mark.image || ''}
+              src={mark.image || '/next.svg'}
               alt={mark.title || ''}
-              // width={40}
-              // height={20}
+              width={60}
+              // height={60}
               title={mark.title}
-              className='hover:opacity-80 rounded w-20x max-h-12'
+              className='hover:opacity-80 rounded max-h-60'
             />
           </div>
           <div>

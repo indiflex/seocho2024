@@ -35,7 +35,14 @@ export default async function Nav() {
           BookMark
         </Button>
       </Link>
-      <div>
+      <div className='flex'>
+        <Link
+          href='https://github.com/indiflex/seocho2024/tree/master/next'
+          target='_blank'
+          className='mt-3 mx-5 hover:text-blue-500'
+        >
+          Github Repo.
+        </Link>
         {name ? (
           <Link href='/my'>
             <img

@@ -4,22 +4,32 @@ import Mark from './Mark';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Book as BookType, Mark as MarkType } from '@/types';
+import { Checkbox } from './ui/checkbox';
+import { Label } from '@radix-ui/react-label';
+import { set } from 'react-hook-form';
+import { RotateCcw, SaveAll, Trash2 } from 'lucide-react';
 
 type SaveBook = (book: BookType) => Promise<void>;
+type RemoveBook = (bookId: number) => Promise<void>;
 type Props = {
   book: BookType;
   saveBook: SaveBook;
+  removeBook: RemoveBook;
 };
 
-export default function Book({ book, saveBook }: Props) {
+export default function Book({ book, saveBook, removeBook }: Props) {
   const [marks, setMarks] = useState<MarkType[]>([]);
-  const [isEditing, toggleEditing] = useReducer((pre) => !pre, false);
+  const [isClickdel, setClickdel] = useState(false);
+  const [isEditing, toggleEditing] = useReducer((pre) => !pre, !book.id);
   const titleRef = useRef<HTMLInputElement>(null);
+  const clickdelRef = useRef<HTMLButtonElement>(null);
 
   const save = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     book.title = titleRef.current?.value || '';
-    saveBook(book);
+    book.clickdel = isClickdel;
+    await saveBook(book);
+    toggleEditing();
   };
 
   const saveMark = async (mark: MarkType) => {
@@ -58,10 +68,12 @@ export default function Book({ book, saveBook }: Props) {
 
   useEffect(() => {
     if (isEditing && titleRef.current) {
-      titleRef.current.value = '';
-      titleRef.current.focus();
+      titleRef.current.value = book.title;
+      titleRef.current.select();
+      setClickdel(book.clickdel);
+      // clickdelRef.current
     }
-  }, [isEditing]);
+  }, [isEditing, book]);
 
   useEffect(() => {
     const getMarks = async (bookId: number) => {
@@ -74,16 +86,54 @@ export default function Book({ book, saveBook }: Props) {
   }, [book]);
 
   return (
-    <div className='w-64 bg-gray-200 mr-3 rounded p-1'>
+    <div className='min-w-64 bg-gray-200 mr-3 rounded p-1'>
       {isEditing ? (
         <form onSubmit={save} className='border-2 border-blue-300 p-2'>
           <Input ref={titleRef} type='text' placeholder='book title...' />
+
+          <div className='flex items-center gap-1 my-1'>
+            <Checkbox
+              id='clickdel'
+              onClick={() => setClickdel((pre) => !pre)}
+              checked={!!isClickdel}
+            />
+            <Label
+              htmlFor='clickdel'
+              className='font-semibold cursor-pointer m-1'
+            >
+              이동 시 자동 삭제
+            </Label>
+          </div>
+
           <div className='flex justify-end gap-5 mt-2'>
-            <Button variant='outline' size='sm' className=''>
-              Cancel
+            {!!book.id && (
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  removeBook(book.id);
+                }}
+                variant='outline'
+                className='text-red-500'
+              >
+                <Trash2 />
+              </Button>
+            )}
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                toggleEditing();
+                if (!book?.id) {
+                  removeBook(book?.id);
+                }
+              }}
+              variant='outline'
+              size='sm'
+              className=''
+            >
+              <RotateCcw />
             </Button>
-            <Button variant='secondary' size='sm'>
-              Save
+            <Button type='submit' variant='secondary' size='sm'>
+              <SaveAll />
             </Button>
           </div>
         </form>
@@ -111,9 +161,11 @@ export default function Book({ book, saveBook }: Props) {
           <div className='text-center'>There is no marks.</div>
         )}
 
-        <Button onClick={addMark} className='float-end'>
-          + Add Mark
-        </Button>
+        {!!book?.id && (
+          <Button onClick={addMark} className='float-end'>
+            + Add Mark
+          </Button>
+        )}
       </div>
     </div>
   );
