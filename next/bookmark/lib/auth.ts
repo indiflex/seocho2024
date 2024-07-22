@@ -67,4 +67,6 @@ export const {
       return baseUrl;
     },
   },
+
+  trustHost: true,
 });
