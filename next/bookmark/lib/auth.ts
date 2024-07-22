@@ -1,9 +1,21 @@
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
+import Credentials from 'next-auth/providers/credentials';
 
 const getUser = async (email: string) => {
   const res = await fetch(
     `${process.env.NEXTAUTH_URL}/api/regist?email=${email}`
+  );
+  return res.json();
+};
+
+const validateUser = async (email: string, passwd: string) => {
+  const res = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/signin?email=${email}`,
+    {
+      method: 'POST',
+      body: JSON.stringify({ email, passwd }),
+    }
   );
   return res.json();
 };
@@ -24,20 +36,37 @@ export const {
   signOut,
 } = NextAuth({
   providers: [
+    Credentials({
+      name: 'Email',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'example@example.com',
+        },
+        passwd: { label: 'Password', type: 'password' },
+      },
+      async authorize(credentials) {
+        if (!credentials || !credentials.email || !credentials.passwd)
+          return null;
+
+        console.log('🚀  credentials:', credentials);
+        const email = credentials.email + '';
+        const passwd = credentials.passwd + '';
+        const data = await validateUser(email, passwd);
+        console.log('🚀  user:', data.user);
+
+        return data.user;
+      },
+    }),
     Google,
-    // Google({
-    //   clientId: process.env.GOOGLE_CLIENT_ID as string,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    // }),
   ],
-  // secret: process.env.AUTH_SECRET as string,
 
   callbacks: {
     async signIn({ account, profile }) {
-      console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&');
-      // if (account?.provider === 'google') {
-      //   console.log('google - callback>>', account, profile);
-      // }
+      if (account?.provider === 'credentials') {
+        return true;
+      }
 
       const email = profile?.email;
       const name = profile?.name || '';

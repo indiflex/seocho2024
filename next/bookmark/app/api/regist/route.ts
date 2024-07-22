@@ -17,8 +17,8 @@ export async function GET(req: NextRequest) {
       { status: 404, statusText: `${email} user's not found` }
     );
   }
-  const { id, nickname } = user;
-  return NextResponse.json({ id, nickname });
+  const { id, nickname, passwd } = user;
+  return NextResponse.json({ id, nickname, passwd });
 }
 
 export async function POST(req: NextRequest) {

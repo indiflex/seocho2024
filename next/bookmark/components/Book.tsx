@@ -8,6 +8,7 @@ import { Checkbox } from './ui/checkbox';
 import { Label } from '@radix-ui/react-label';
 import { set } from 'react-hook-form';
 import { RotateCcw, SaveAll, Trash2 } from 'lucide-react';
+import { useSession } from '@/lib/session';
 
 type SaveBook = (book: BookType) => Promise<void>;
 type RemoveBook = (bookId: number) => Promise<void>;

@@ -39,14 +39,14 @@ export default async function Nav() {
         <Link
           href='https://github.com/indiflex/seocho2024/tree/master/next/bookmark'
           target='_blank'
-          className='mt-3 mx-5 hover:text-blue-500'
+          className='mt-2 mx-5 hover:text-blue-500'
         >
           Github Repo.
         </Link>
         {name ? (
           <Link href='/my'>
             <img
-              src={image || ''}
+              src={image || '/next.svg'}
               alt={name || ''}
               width={40}
               height={40}

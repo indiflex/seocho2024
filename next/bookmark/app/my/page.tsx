@@ -23,7 +23,7 @@ export default async function MyPage() {
       <h1 className='text-3xl text-green-500 my-10'>My Profile</h1>
       <div className='flex gap-5'>
         <img
-          src={image || ''}
+          src={image || '/next.svg'}
           alt={name || ''}
           width={100}
           height={100}
