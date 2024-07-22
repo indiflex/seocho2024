@@ -1,4 +1,3 @@
-
 create table User (
     id mediumint unsigned not null auto_increment comment '사용자번호',
     createdate timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '등록일시',

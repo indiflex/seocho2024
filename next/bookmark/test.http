@@ -1,0 +1,40 @@
+@api=http://localhost:3000/api
+
+### get books
+GET {{api}}/books?userId=4
+
+###
+GET {{api}}/regist?email=indiflex.corp@gmail.com
+
+###
+# insert book testing
+POST {{api}}/books 
+
+{
+  "title": "Test Book12",
+  "owner": 4,
+  "clickdel": 0
+}
+
+### get a book
+GET {{api}}/books/3
+
+### update book
+PATCH {{api}}/books/5
+
+{
+  "title": "TTT",
+  "clickdel": 1
+}
+
+###
+
+PUT {{api}}/books/6
+
+{
+  "title": "SSS",
+  "clickdel": 1
+}
+
+### delete book
+DELETE {{api}}/books/12
