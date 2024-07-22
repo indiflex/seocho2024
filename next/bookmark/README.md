@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Release Note
+### 0.2.1
+ - Mark/Book CRUD
+
 ## Getting Started
 
 First, run the development server:
